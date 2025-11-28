@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Prioriza - login</title>
+    <link rel="icon" href="images/LogoPriorizaSmall.png">
+</head>
+
+<header class="headerMenu">
+
+    <h1>LOGO</h1>
+
+    <nav class="navCenter">
+        <ul class="menu">
+            <li>
+                <button class="buttonsHeader">
+                    <span class="lexend buttonsHeaderText">Quem somos</span>
+                </button>
+            </li>
+
+            <li class="dropdown">
+                <button class="buttonsHeader">
+                    <span class="lexend buttonsHeaderText">Recursos</span>
+                    <svg class="iconsBlackWhite" width="30" height="30" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 19.25L7.5 11.75L9.25 10L15 15.75L20.75 10L22.5 11.75L15 19.25Z" fill="black" />
+                    </svg>
+
+                </button>
+                <ul class="submenu">
+                    <li>Funcionalidades</li>
+                    <li>Tutoriais</li>
+                    <li>Central de ajuda</li>
+                </ul>
+            </li>
+
+            <li>
+                <button class="buttonsHeader" id="modoClaroEscuroButton" style="width: 13.5rem;">
+                    <span class="lexend buttonsHeaderText">Modo Claro</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <a id="fazerLoginCadastro-button" href="#" onclick="showLogin()">
+        <button class="buttonsHeader cadastrar-se">
+            <span id="fazerLoginCadastro-text" class="lexend buttonsHeaderText">Fazer login</span>
+        </button>
+    </a>
+
+</header>
+
+<body class="loginCadastro-body">
+
+
+
+<body class="loginCadastro-body">
+    <!-- Tela de Cadastro (visível por padrão) -->
+    <div id="cadastro" class="loginCadastro-background active">
+        <div class="loginCadastro-ladoEsquerdo">
+            <img class="loginCadastro-images" src="images/image-removebg-preview (9).png" alt="Imagem de cadastro">
+        </div>
+        <div class="loginCadastro-ladoDireito">
+            <div class="loginCadastro-ladoInputs-topo">
+                <h1 class="loginCadastro-ladoInputs-topo-titulo">Criar conta</h1>
+            </div>
+            <div class="loginCadastro-ladoInputs-inputs">
+                <input type="text" class="loginCadastro-ladoInputs-username" placeholder="Crie seu nome de usuário">
+                <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Cadastre seu e-mail">
+                <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Crie sua senha">
+                <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
+                    <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Cadastrar-se">
+                </a>
+                <p class="loginCadastro-ladoInputs-footer">Já tem uma conta no Prioriza? <a class="loginCadastro-ladoInputs-outraOpcao-click toggle-login" href="#">Faça login!</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Login (oculta por padrão) -->
+    <div id="login" class="loginCadastro-background">
+        <div class="loginCadastro-ladoEsquerdo">
+            <div class="loginCadastro-ladoInputs-topo">
+                <h1 class="loginCadastro-ladoInputs-topo-titulo">Acessar conta</h1>
+            </div>
+            <div class="loginCadastro-ladoInputs-inputs">
+                <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Digite seu e-mail">
+                <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Digite sua senha">
+                <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
+                    <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Entrar">
+                </a>
+                <p class="loginCadastro-ladoInputs-footer">É novo no Prioriza? <a class="loginCadastro-ladoInputs-outraOpcao-click toggle-cadastro" href="#">Cadastre-se já e comece a priorizar você!</a></p>
+            </div>
+        </div>
+        <div class="loginCadastro-ladoDireito">
+            <img class="loginCadastro-images" src="images/image-removebg-preview (9).png" alt="Imagem de login">
+        </div>
+    </div>
+
+    <script src="cadastroLogin.js"></script>
+</body>
+
+</html>

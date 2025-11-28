@@ -1,0 +1,2730 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Manrope:wght@200..800&display=swap');
+
+/* tema claro */
+:root {
+    --bg-color: #ffffff;
+    --header-color: #FFFFFF;
+    --accent-bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --svg-stroke-inverted: #ffffff;
+    --svg-stroke: #000000;
+    --background-popups: #E0E1FB;
+    --sidebar-button-hover: #E0E1FC;
+    --sidebar-button-ativo: #C6C7F9;
+    --sidebar-button-ativo-border: #888AE6;
+    --sidebar-title-text: #C6C7F9;
+    --hover-color: #eaeaea80;
+    --active-color: #eaeaea70;
+    --border-popup-input: #B6B7E9;
+    --shadowbox: #C9CAFD;
+    --tarefa-importante-ativo-bg: #000;
+    --tarefa-importante-ativo-text: #fff;
+    --adicionar-tarefa-botao: rgba(255, 255, 255, 0.5);
+    --agendadas-popup-icon-hover: #888AE6;
+    --scrollbar-color: #e6e6e6;
+
+
+    --z-index-sidebar: 1;
+    --z-index-sidebar-before: -1; /* fundo meio transparente atrás do menu */
+    --z-index-hamburger-button: 4;
+    --z-index-adicionarTarefa-button: 1;
+    --z-index-adicionarTarefa-popUp: 4;
+    --z-index-buscarTarefa-popUp: 3;
+    --z-index-adicionarCategoria-popUpLateral: 3;
+    --z-index-calendario-popUp: 3;
+    --z-index-iconImages: 0;
+    --z-index-iconImages-background: -1;
+    --z-index-avisoCategoriaTarefaExcluida: 5;
+
+
+    --botao-lateral-hover: #E0E1FC;
+    --botao-lateral-ativo: #D2D3FA;
+    --lixeira-hover: #ff0000;
+}
+
+/* tema escuro */
+[data-theme="dark"] {
+    --bg-color: #1E1E1E;
+    --header-color: #292929;
+    --accent-bg-color: #2C2C2C;
+    --text-color: #f2ffff;
+    --svg-stroke: #ffffff;
+    --background-popups: #2C2C2C;
+    --sidebar-button-hover: #333333;
+    --sidebar-button-ativo: #9799F5;
+    --sidebar-button-ativo-border: #7173CA;
+    --sidebar-title-text: #7173CA;
+    --hover-color: #33333365;
+    --border-popup-input: --bg-color;
+    --shadowbox: --bg-color;
+    --tarefa-importante-ativo-bg: #fff;
+    --tarefa-importante-ativo-text: #1E1E1E;
+    --svg-stroke-inverted: #000000;
+    --scrollbar-color: #4a4a4a;
+
+
+    --adicionar-tarefa-botao: rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-color) transparent;
+}
+
+.lexend {
+    font-family: "Lexend", sans-serif;
+    font-weight: 600;
+}
+
+.manrope {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+/* MENU */
+
+.bodyMenu {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    margin: 0;
+}
+
+.headerMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: var(--header-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 2.875rem;
+    box-sizing: border-box;
+
+    z-index: 9998;
+}
+
+.headerMenu h1 {
+    margin-left: 0;
+}
+
+.cadastrar-se {
+    box-shadow: inset 0 0 0 0.25rem #888AE6;
+}
+
+.cadastrar-se span {
+    color: #888AE6;
+    font-size: 1.562rem;
+}
+
+.buttonsHeaderText {
+    margin: 0 0 0 1%;
+    display: inline-block;
+    padding: 0.562rem 0.875rem;
+    color: var(--text-color);
+}
+
+.navCenter {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.menu span {
+    font-size: 1.562rem;
+}
+
+.menu>li { /* submenu */
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    width: 21.2vw;
+
+    background: var(--btn-color);
+
+    left: 0;
+    top: calc(100% + 0.562rem);
+    border-radius: 1.875rem;
+    padding: 0.625rem;
+    list-style: none;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submenu li {
+    font-family: "Lexend", sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+
+    margin: 1.312rem;
+    height: 2.75vh;
+}
+
+.submenu li:hover {
+    position: relative;
+    background-color: var(--hover-color);
+    border-radius: 1.25rem;
+
+    left: 1%;
+}
+
+.menu>li:hover .submenu { /* mostrar submenu ao passar mouse */
+    display: block;
+}
+
+.dropdown {
+    position: relative;
+    background: var(--btn-color);
+    cursor: pointer;
+    border-radius: 1.875rem;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background: var(--btn-color);
+    border-radius: 0.625rem;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.62rem;
+    margin: 0;
+    min-width: 150px;
+
+    display: none;
+}
+
+.dropdown-menu li {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.312rem;
+    font-family: "Lexend", sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* quando passa o mouse no botão, aparece o menu */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.buttonComeceAgora {
+    border-radius: 1.875rem;
+    padding: 0.625rem 2.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: none;
+}
+
+.buttonComeceAgora svg {
+    width: 5vw;
+    height: 5vh;
+    margin-left: 0;
+    color: #FFFFFF;
+}
+
+.buttonComeceAgora span {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.iconsBlackWhite path {
+    stroke: var(--svg-stroke);
+    fill: var(--svg-stroke);
+}
+
+.section1 {
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+section {
+    height: 100vh;
+}
+
+#organizacao,
+#praticidade,
+#flexibilidade,
+#personalizacao {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+.ladoEsquerdo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.ladoDireito {
+    padding-left: 3vw;
+
+}
+
+.quadrado {
+    width: 100%;
+    height: 70%;
+    background-color: rgb(121, 121, 121);
+    border-radius: 20px;
+}
+
+.titulos {
+    font-family: 'Lexend', sans-serif;
+    font-size: 2rem;
+}
+
+.titulos p {
+    margin: 2vh 0;
+}
+
+#h1 {
+    color: #C6C7E9;
+}
+
+#h1,
+#s {
+    margin: 0;
+}
+
+.mainText {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.5rem;
+}
+
+#imgEtxt {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#imgCheck {
+    width: 5vw;
+    height: 5vh;
+    padding-right: 0.5rem;
+}
+
+
+
+/* LOGIN/CADASTRO */
+
+.loginCadastro-body {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+}
+
+.loginCadastro-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    min-width: 1000px;
+    width: auto;
+    min-height: 65vh;
+    height: auto;
+    padding: 1rem 4rem;
+    background-color: var(--background-popups);
+    border-radius: 1.25rem;
+    box-sizing: border-box;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.loginCadastro-background.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#cadastro {
+    box-shadow: #888AE6 5px 5px, #9395e7 10px 10px, #b7b8f3 15px 15px, #c6c7ec 20px 20px, rgb(200, 202, 236) 25px 25px 10px -3px;
+}
+
+#login {
+    box-shadow: #888AE6 -5px 5px, #9395e7 -10px 10px, #b7b8f3 -15px 15px, #c6c7ec -20px 20px, rgb(200, 202, 236) -25px 25px 10px -3px;
+}
+
+.loginCadastro-ladoEsquerdo,
+.loginCadastro-ladoDireito {
+    width: 50%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginCadastro-ladoInputs-topo {
+    margin: 1rem;
+}
+
+.loginCadastro-ladoInputs-topo-titulo {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 0.75rem;
+    text-align: center;
+
+    color: var(--text-color);
+}
+
+.loginCadastro-ladoInputs-username,
+.loginCadastro-ladoInputs-email,
+.loginCadastro-ladoInputs-senha {
+    width: 100%;
+    height: 7.5vh;
+    border-radius: 1.25rem;
+    border: none;
+    font-size: large;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+
+    background-color: var(--bg-color);
+    color: var(--svg-stroke);
+
+    background-repeat: no-repeat;
+    background-position: 1.25rem center;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 3.75rem;
+    box-sizing: border-box;
+
+    transition: background-color 0.1s;
+}
+
+.loginCadastro-ladoInputs-username:hover,
+.loginCadastro-ladoInputs-email:hover,
+.loginCadastro-ladoInputs-senha:hover {
+    background-color: var(--hover-color);
+}
+
+.loginCadastro-ladoInputs-username:focus,
+.loginCadastro-ladoInputs-email:focus,
+.loginCadastro-ladoInputs-senha:focus {
+    background-color: var(--active-color);
+}
+
+.loginCadastro-ladoInputs-username {
+    background-image: url('images/person.png');
+    background-size: 2rem 2rem;
+}
+
+.loginCadastro-ladoInputs-email {
+    background-image: url('images/mail.png');
+}
+
+.loginCadastro-ladoInputs-senha {
+    background-image: url('images/lock.png');
+}
+
+.loginCadastro-ladoInputs-outraOpcao {
+    width: 100%;
+    height: 8vh;
+    border-radius: 2rem;
+    border: none;
+    background-color: #888AE6;
+    color: #FFFFFF;
+    font-size: x-large;
+    cursor: pointer;
+    box-shadow: rgba(146, 144, 144, 0.309) 0px 3px 5px;
+
+    transition: background-color 0.1s;
+}
+
+
+.loginCadastro-ladoInputs-outraOpcao:hover {
+    background-color: #7778cb;
+}
+
+.loginCadastro-ladoInputs-outraOpcao-click {
+    color: #A7A9FF;
+    padding-left: 0.5rem;
+
+    transition: color 0.2s;
+}
+
+.loginCadastro-ladoInputs-outraOpcao-click:hover {
+    color: #888AE6;
+}
+
+
+.loginCadastro-ladoInputs-footer {
+    font-family: 'Manrope', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+
+    color: var(--text-color);
+}
+
+.loginCadastro-ladoInputs-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.loginCadastro-ladoInputs-inputs input::placeholder {
+    font-family: 'Manrope', sans-serif;
+    color: var(--svg-stroke);
+}
+
+.loginCadastro-images {
+    max-width: 100%;
+    height: auto;
+}
+
+/* FUNCIONALIDADES*/
+
+.funcionalidades {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.funcionalidades p {
+    font-size: 1.5rem;
+}
+
+.funcionalidades h1 {
+    font-size: 2.5rem;
+    margin: 0;
+
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    justify-content: space-between;
+}
+
+.funcionalidades .conteudo-esquerda {
+    flex: 1;
+    margin-left: 10%;
+}
+
+.funcionalidades .conteudo-direita {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.funcionalidades .conteudo-direita img {
+    max-width: 70%;
+    height: auto;
+}
+
+#tituloFuncionalidades span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#palavra2,
+#palavra3 {
+    margin: 0;
+}
+
+#tituloFuncionalidades span:hover {
+    transform: scale(1.1);
+    color: var(--sidebar-button-ativo-border);
+}
+
+.btnFunciona {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 2.375rem;
+
+
+    border: none;
+    background-color: var(--site-button-color);
+    color: #FFFFFF;
+    border-radius: 1.875rem;
+
+    cursor: pointer;
+    transform-origin: left center;
+    transition: transform 0.2s ease;
+}
+
+.btnFunciona:hover {
+    transform: scale(1.1);
+}
+
+.btnFunciona span {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.circuloFundo {
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    margin-top: 2rem;
+
+    background-color: #f9f9f9;
+    border-top-left-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.circuloFundo img {
+    min-width: 20%;
+    height: auto;
+    margin-left: 2rem;
+    padding-right: 2rem;
+}
+
+.containerGeral {
+    padding-left: 2rem;
+}
+
+.funcionalidadesContinuacao .opcoesTopo {
+    display: flex;
+    flex-direction: row;
+    margin-right: 1rem;
+    gap: 1rem;
+}
+
+.funcionalidadesContinuacao .mainContent h3 {
+    font-size: 1.5rem;
+}
+
+.funcionalidadesContinuacao .opcao {
+    cursor: pointer;
+}
+
+.funcionalidadesContinuacao .opcao.ativo {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.funcionalidadesContinuacao .conteudo {
+    display: none;
+}
+
+.funcionalidadesContinuacao .conteudo.ativo {
+    display: block;
+}
+
+.submenu-recursosMenuSite { /* submenu de recursos no menu hamburger */
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu-recursosMenuSite.ativo {
+    max-height: 200px;
+}
+
+.submenu-recursosMenuSite li { /* itens do submenu */
+    margin: 0.5rem 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.submenu-recursosMenuSite.ativo li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bodyTarefas {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+
+    transition: all 0.2s ease;
+}
+
+.wrapper-layoutPrincipal {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sideBar {
+
+    width: 25%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-right: 2px solid #D9D9D9;
+
+    justify-content: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+
+}
+
+.sidebar-logo-modoEscuro {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 1rem 2rem;
+}
+
+.sidebar-logo {
+    width: 6rem;
+}
+
+.sidebar-icons {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin: 0 1.5rem 0 3.05rem;
+}
+
+.sidebar-icons path {
+    stroke: var(--svg-stroke);
+}
+
+.sidebar-icons-importante path {
+    fill: var(--svg-stroke);
+}
+
+.search-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.modoClaroEscuroButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 1.875rem;
+    background-color: var(--bg-color);
+
+    cursor: pointer;
+
+    width: auto;
+    white-space: nowrap;
+}
+
+.modoClaroEscuroButton:hover {
+    background-color: var(--hover-color);
+}
+
+#sun-icon { /* mostra o sol por padrão (modo claro) */
+    display: block;
+}
+
+#moon-icon { /* oculta a lua por padrão */
+    display: none;
+}
+
+.hamburger-button { /* botão hamburger - oculto por padrão, visível no celular */
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    top: 1rem;
+    left: calc(100% - 3.5rem);
+    z-index: 10001;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+
+    align-items: center;
+}
+
+.hamburger-button-toDoList {
+    position: fixed;
+}
+
+.hamburger-button svg path {
+    fill: var(--svg-stroke);
+    stroke: var(--svg-stroke);
+}
+
+.hamburger-button:hover {
+    background-color: var(--hover-color);
+}
+
+.hamburger-button .hamburger-icon { /* ÍCONE/DESENHO hamburger visível por padrão */
+    display: block;
+}
+
+.hamburger-button.ativo { /* quando ativo oculta hamburger */
+    display: none;
+}
+
+.hamburger-button.menu-open {
+    background-color: var(--hover-color);
+}
+
+/* icones do botão */
+.hamburger-button .hamburger-icon,
+.hamburger-button .close-icon {
+    width: 50%;
+    height: 50%;
+    stroke: var(--svg-stroke);
+    transition: opacity 0.3s ease;
+}
+
+.hamburger-button .hamburger-icon-toDoList {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* por padrão, 3 riscos visivel, X invisivel */
+.hamburger-button .hamburger-icon {
+    display: flex;
+    opacity: 1;
+    justify-self: center;
+}
+
+.hamburger-button .close-icon {
+    display: none;
+    opacity: 0;
+}
+
+/* quando menu aberto, icone 3 riscos invisivel, icone X visivel */
+.hamburger-button.menu-open .hamburger-icon {
+    display: none;
+    opacity: 0;
+}
+
+.hamburger-button.menu-open .close-icon {
+    display: flex;
+    opacity: 1;
+    justify-self: center;
+}
+
+
+.siteMenu {
+    display: none;
+    position: fixed;
+    background: var(--bg-color);
+    padding: 1.25rem;
+    padding-top: 0;
+    width: 75%;
+    right: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 9998;
+    border-radius: 0 0 1.5rem 1.5rem;
+
+
+    height: auto;
+}
+
+.menu-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bodyMenu {
+    padding-top: 3.5rem;
+}
+
+.menu-overlay { /* overlay escuro do menu hamburger */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9997;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: none; /* oculto por padrão, visível quando ativo */
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* permite click no overlay pra fechar o menu */
+}
+
+@media (max-width: 768px) {
+    .menu-overlay {
+        display: block; /* visível em tablet/celular */
+    }
+
+    .hamburger-button {
+        display: block; /* mostra o botão */
+    }
+
+    .sideBar { /* sidebar da to do list */
+        position: fixed;
+        top: 0;
+        left: -100% !important; /* fora da tela por padrão */
+        width: 90%;
+        z-index: var(--z-index-sidebar);
+        background-color: var(--bg-color);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s ease-in-out;
+        overflow-y: auto;
+        border-right: none;
+    }
+
+    .sideBar.ativo { /* quando ativo: desliza pra dentro de tela */
+        left: 0 !important;
+    }
+
+    .sideBar::before { /* overlay escuro atrás do menu */
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 100%;/* fora da tela inicialmente */
+        width: 10%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: var(--z-index-sidebar-before); /* atrás do menu */
+        transition: left 0.3s ease-in-out;
+    }
+
+    .sideBar.ativo::before {
+        left: 90%; /* aparece quando sidebar abre */
+    }
+
+    .sidebar-logo-modoEscuro {
+        margin: 1rem 1rem;
+    }
+
+}
+
+.buttonsHeader {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.562rem 0.875rem;
+    border: 0;
+    border-radius: 1.875rem;
+    background-color: var(--bg-color);
+
+    cursor: pointer;
+
+    width: auto;
+    white-space: nowrap;
+}
+
+.buttonsHeader:hover {
+    background-color: var(--hover-color);
+}
+
+.buttonsHeaderText {
+    margin-left: 0.125rem;
+    display: inline-block;
+    padding: 0.562rem 0.875rem;
+    color: var(--text-color);
+}
+
+.tarefa {
+    border-radius: 1.25rem;
+    width: 80%;
+    height: auto;
+    background-color: var(--accent-bg-color);
+    box-shadow: 0 0 0 2px #B6B7E9 inset;
+    padding: 1.25rem 1.875rem;
+
+    font-family: "Lexend", sans-serif;
+
+    margin-bottom: 1rem;
+
+    transition: all 0.2s ease-in-out;
+
+    justify-self: center;
+}
+
+.tarefa-importanteTexto {
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    margin: 0;
+    display: inline-block;
+
+    color: #B6B7E9;
+    font-weight: 600;
+}
+
+.tarefa-edicaoInput {
+    width: 100%;
+}
+
+.containerCategorias {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem
+}
+
+.buttonDelete {
+    border: 0;
+}
+
+hr {
+    margin: 4.4% 0px;
+    width: 57%;
+    height: 1px;
+    color: #B9B8B8;
+    background: #B9B8B8;
+
+    font-size: 0;
+    border: 0;
+}
+
+.adicionarTarefa {
+    position: fixed;
+    z-index: var(--z-index-adicionarTarefa-button);
+    bottom: 1.25rem;
+    right: 1.25rem;
+
+    padding: 1rem;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: row;
+
+    cursor: pointer;
+
+    background-color: var(--adicionar-tarefa-botao);
+
+    transition: all 0.2s;
+}
+
+.adicionarTarefa:hover {
+    background-color: var(--hover-color);
+}
+
+.icon-images {
+    position: relative;
+    display: inline-block;
+
+    margin: 0.375rem;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    object-fit: contain;
+
+    width: min(5vw, 2rem);
+    height: min(5vw, 2rem);
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
+.icon-images img,
+.icon-images svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: var(--z-index-iconImages);
+}
+
+.icon-images svg path {
+    stroke: var(--svg-stroke);
+}
+
+.icon-images::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--hover-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    z-index: var(--z-index-iconImages-background);
+}
+
+.small-icon-images {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.small-icon-images:hover::before {
+    width: 2rem;
+    height: 2rem;
+}
+
+.small-icon-images:active::before {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.big-icon-images {
+    height: 1.75rem;
+    width: 1.75rem;
+}
+
+.big-icon-images:hover::before {
+    width: 3rem;
+    height: 3rem;
+}
+
+.big-icon-images:active::before {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.adicionarTarefa-popup,
+.editarTarefa-popup {
+    opacity: 0;
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+    z-index: var(--z-index-adicionarTarefa-popUp);
+    width: 67%;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    padding: 2rem 4rem;
+    border-radius: 1.5rem;
+
+    background-color: var(--background-popups);
+    font-family: "Lexend", sans-serif;
+    box-sizing: border-box;
+
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.adicionarTarefa-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.adicionarTarefa-popup p {
+    font-size: 1.375rem;
+    margin: 1rem 0;
+}
+
+.adicionarTarefa-popup hr {
+    width: 100%;
+    margin: 0 0 1.25rem 0;
+}
+
+.adicionarTarefa-button {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem 0.25rem;
+    margin-top: 1rem;
+
+    width: 100%;
+
+    gap: 1rem;
+
+    background-color: var(--bg-color);
+    border: none;
+
+    cursor: pointer;
+
+    font-family: "Lexend", sans-serif;
+    font-size: 1.25rem;
+    border-radius: 1.25rem;
+
+    color: var(--text-color);
+
+    transition: background-color 0.2s;
+}
+
+.adicionarTarefa-button:hover {
+    background-color: var(--hover-color);
+}
+
+.adicionarTarefa-buttonFixed-image {
+    width: 10%;
+    padding-right: 1rem;
+}
+
+
+
+.editarTarefa-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.editarTarefa-popup p {
+    font-size: 1.375rem;
+    margin: 1rem 0;
+}
+
+.editarTarefa-popup hr {
+    width: 100%;
+    margin: 0 0 1.25rem 0;
+}
+
+.nomeTarefaEditar-input {
+    width: 100%;
+    height: 14.5%;
+
+    border-radius: 1.25rem;
+
+    padding: 12px 20px;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    border: 0;
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 4px 0 #B6B7E9;
+
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+}
+
+.popup-icons {
+    width: 1rem;
+    height: 1rem;
+}
+
+.popup-icons path {
+    stroke: var(--svg-stroke);
+}
+
+.nomeTarefa-input {
+    width: 100%;
+    height: 14.5%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 2.75rem;
+    max-height: 8rem;
+
+    border-radius: 1.25rem;
+
+    padding: 12px 20px;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    border: 0;
+    background-color: var(--bg-color);
+
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+
+    color: var(--text-color);
+
+}
+
+.topAddTask {
+    display: flex;
+    flex-direction: row;
+    height: 25.5%;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topAddTask-images {
+    justify-self: end;
+    flex-direction: row;
+}
+
+.topAddTask-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.buscarTarefa {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    padding: 1.25rem;
+
+    z-index: var(--z-index-buscarTarefa-popUp);
+    min-width: 70%;
+    opacity: 0;
+    background-color: var(--background-popups);
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.buscarTarefa.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.buscarTarefa-NenhumaTarefaEncontrada{
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+
+
+.search-input {
+    flex: 1;
+    height: 5vh;
+    border-radius: 1.25rem;
+    border: 0px;
+    padding-left: 3.5rem;
+
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('images/searchImageGray.svg');
+    background-repeat: no-repeat;
+    background-position: 1.5rem center;
+    background-size: 1.5rem;
+
+    background-color: var(--bg-color);
+
+    color: var(--svg-stroke);
+
+    position: sticky;
+    top: 0;
+}
+
+.search-input::placeholder {
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.search-input:focus {
+    border: none;
+}
+
+.buscarTarefa-resultados {
+    height: calc(100% - 5vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    max-height: 600px;
+}
+
+.tarefaResultadosBusca {
+    border-radius: 1.25rem;
+    height: auto;
+    background-color: var(--accent-bg-color);
+    box-shadow: 0 0 0 2px #B6B7E9 inset;
+    font-family: "Lexend", sans-serif;
+    padding: 0.75rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.topTaskTitleResultadosBusca {
+    font-family: "Lexend", sans-serif;
+    font-weight: 550;
+    cursor: text;
+    justify-self: end;
+
+    font-size: 1rem;
+    max-width: 70%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sideBar-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 1.25rem;
+    margin: 0.8rem;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+
+    position: relative;
+}
+
+.sideBar-button:hover {
+    background-color: var(--sidebar-button-hover);
+}
+
+.sideBar-button.ativo,
+.sideBar-button.ativo:hover {
+    background-color: var(--sidebar-button-ativo);
+}
+
+.sideBar-button-images {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 2.5rem;
+}
+
+#popup-adicionar-categoria-lateral {
+    position: absolute;
+    bottom: 100%;
+    width: 80%;
+    justify-self: center;
+    background-color: var(--background-popups);
+    border-radius: 1rem;
+    box-shadow: 0px 0px 30px 10px var(--shadowbox);
+    z-index: var(--z-index-adicionarCategoria-popUpLateral);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    padding: 1rem;
+    font-family: "Lexend", sans-serif;
+    overflow-y: auto;
+}
+
+#popup-adicionar-categoria-lateral.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.popup-lateral-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.25rem;
+}
+
+.menuOptions {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.buttonsMenuOptions {
+    position: relative;
+    height: 3.7rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.buttonsMenuOptions img {
+    margin: 0 1.5rem 0 3.05rem;
+}
+
+.buttonsMenuOptions:hover {
+    background-color: var(--sidebar-button-hover);
+}
+
+.buttonsMenuOptions.ativo {
+    border-left: 0.44rem solid var(--sidebar-button-ativo-border);
+    background-color: var(--sidebar-button-ativo);
+}
+
+.titleSideBar {
+    color: var(--sidebar-title-text);
+    font-family: "Lexend", sans-serif;
+    font-weight: 550;
+    font-size: 1.562rem;
+
+    justify-self: center;
+}
+
+.checkBoxTarefa {
+    appearance: none;/* remove o estilo padrão do checkbox(feio) */
+
+    /* tamanho e forma */
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border: 0.2rem solid #9B9CC8;
+    border-radius: 50%;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+
+    margin: 0px;
+}
+
+.checkBoxTarefa:checked {
+    background-color: #9B9CC8;
+    box-shadow: 0 0 0 3px rgba(155, 156, 200, 0.3);
+}
+
+.checkBoxTarefa:active { /* animação ao clicar no checkbox */
+    transform: scale(0.9);
+}
+
+.topTask {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topTaskTitle {
+    font-family: "Lexend", sans-serif;
+    font-weight: 550;
+    font-size: 1.75rem;
+    cursor: text;
+
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    justify-self: end;
+}
+
+.topTask-images {
+    justify-self: end;
+    flex-direction: row;
+}
+
+.topTask-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.container-metades {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    height: 100%;
+}
+
+.metade-esquerda,
+.metade-direita {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    text-align: justify;
+
+}
+
+.metade-esquerda {
+    width: 25%;
+    gap: 0.625rem;
+}
+
+.metade-direita {
+    width: 75%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+.descricao-tarefa {
+    margin-top: 1rem;
+
+    max-height: 11.375rem;
+
+    display: inline-block;
+
+    margin: 0;
+    word-wrap: break-word;
+    white-space: normal;
+
+    text-align: justify;
+}
+
+.categoria {
+    width: calc(100% - 0.875rem);
+
+    border: 0.125rem solid red;
+    border-radius: 0.5rem;
+
+    padding: 0.3125rem;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.categoria-icone {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.wrapper-bottom-inputs {
+    display: flex;
+    gap: 0.5rem;
+    height: 100%;
+}
+
+.wrapper-bottom-inputs>* {
+    /* "> *" = todos os elementos filhos diretos do elemento anterior*/
+
+    flex: 1;
+    height: 2.875rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-family: "Lexend", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 2px var(--border-popup-input) inset;
+
+}
+
+.bottom-imputs-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.categoria-tarefa {
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.categoria-titulo {
+    font-weight: 600;
+}
+
+.categoria-lixeira {
+    stroke: var(--svg-stroke);
+    transition: all 0.1s;
+}
+
+.categoria-lixeiraWrapper:hover .categoria-lixeira {
+    stroke: var(--lixeira-hover);
+}
+
+.categoria-ladoEsquerdo {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 0.75rem;
+
+    max-width: calc(100% - 1.5rem);
+}
+
+.categoria-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin: 0.625rem 0;
+}
+
+.categoria-input {
+    display: flex;
+    flex-direction: column;
+    padding: 0.625rem;
+    gap: 0.5rem;
+}
+
+.categoria-inputs-nome {
+    width: calc(100% - 2rem);
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+
+    padding: 0 1rem;
+
+}
+
+.categoria-inputs-nome-popup {
+    background-color: var(--background-popups);
+}
+
+.categoria-inputs-cor {
+    padding: 0.125rem;
+    border-radius: 6px;
+    width: 100%;
+    background-color: var(--bg-color);
+    cursor: pointer;
+}
+
+.categoria-inputs-cor-popup {
+    background-color: var(--background-popups);
+}
+
+.categoria-circulo {
+    border-radius: 50%;
+    width: 1.125rem;
+    height: 1.125rem;
+
+    min-width: 1.125rem;
+    min-height: 1.125rem;
+}
+
+.categoria-nome {
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wrapper-categorias {
+    position: relative;
+    display: inline-block;
+
+    max-width: 30%;
+}
+
+.wrapper-categoriasLateral {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.categorias {
+    pointer-events: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: calc(100% - 1.5rem);
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    background-color: var(--bg-color);
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.categorias.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.categorias-list {
+    height: 7.5rem;
+}
+
+.categorias:not(.show) { /* quando categoria não tá visível, desativa os clicks */
+    pointer-events: none !important;
+}
+
+
+.categorias.show .categoria-item,
+.categorias.show .categoria-lixeiraWrapper {
+    pointer-events: auto;
+}
+
+.categorias ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 7.5rem; /* altura de 3 containers( categoria, importante e data) */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b6b7e91e transparent;
+}
+
+.categorias ul::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.categorias ul::-webkit-scrollbar-thumb {
+    background-color: #B6B7E9;
+    border-radius: 0.625rem;
+}
+
+.categorias-top {
+    display: flex;
+    flex-direction: row;
+
+    height: 2.25rem;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categorias-button {
+    background-color: var(--bg-color);
+    width: 100%;
+
+    font-family: "Lexend", sans-serif;
+    font-weight: 600;
+
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.625rem;
+    cursor: pointer;
+
+    color: var(--text-color);
+}
+
+.categorias-button:hover {
+    background-color: var(--hover-color);
+}
+
+/* lista de categorias posição inicial */
+.lista-categoria {
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: auto;
+}
+
+.lista-categoria.show {
+    opacity: 1;
+}
+
+/* nova categoria começa fora da tela na direita */
+.nova-categoria {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+/* animação da lista de categorias, some indo pra esquerda*/
+.lista-categoria.slide-left {
+    opacity: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+}
+
+/* animação do popup de nova categoria, aparece vindo da esquerda */
+.nova-categoria.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* animação de popup nova categoria, faz slide pra direita */
+.nova-categoria.slide-right {
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+}
+
+/* fecha popup para baixo */
+.categorias.close-down {
+    transform: translateY(10%);
+    opacity: 0;
+}
+
+.categoria-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 0.625rem;
+    align-items: center;
+
+    width: 80%;
+    justify-self: center;
+    align-self: center;
+}
+
+.categoria-item:hover {
+    background-color: var(--hover-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.categoria-importante {
+    width: calc(100% - 0.875rem);
+
+    background-color: #B6B7E950;
+    border: 0.150rem solid #B6B7E9;
+
+    border-radius: 0.5rem;
+
+    padding: 0.3125rem;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.categoria-data {
+    display: flex;
+    padding: 0.3125rem;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 123, 255, 0.1);
+    border: 0.125rem solid #007bff;
+    border-radius: 0.5rem;
+}
+
+.tarefa-dataTexto {
+    margin: 0;
+    color: #007bff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+.tarefa-importante {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.tarefa-importante.ativo {
+    background-color: var(--tarefa-importante-ativo-bg);
+    color: var(--tarefa-importante-ativo-text);
+}
+
+.tarefa-importante svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.tarefa-importante svg path {
+    fill: var(--svg-stroke);
+}
+
+.tarefa-importante.ativo svg path {
+    fill: var(--svg-stroke-inverted);
+}
+
+.tarefa-agendar {
+    padding: 0 0.5rem;
+    transition: background-color 0.2s;
+    text-align: center;
+}
+
+.tarefa-agendar:hover {
+    background-color: var(--hover-color);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #007bff;
+}
+
+.buttonCategorias {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 0;
+
+    height: 100%;
+    width: 100%;
+
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    box-shadow: 0 0 0 2px var(--border-popup-input) inset;
+    transition: background-color 0.2s;
+}
+
+.buttonCategorias:hover {
+    background-color: var(--hover-color);
+}
+
+.buttonCategorias-image{
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.categoria-selecionada {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    background-color: rgba(var(--r), var(--g), var(--b), 0.35);
+    border: 2px solid var(--cor-borda);
+
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box
+}
+
+.svgInsideButtons {
+    justify-self: center;
+    align-self: center;
+}
+
+.avisoTarefaExcluida {
+    opacity: 0;
+    position: fixed;
+    transform: translateX(-50%);
+    top: 5%;
+    left: 50%;
+    z-index: var(--z-index-avisoCategoriaTarefaExcluida);
+
+    color: var(--text-color);
+
+    width: 15%;
+    background-color: var(--background-popups);
+    border: 2px solid var(--sidebar-button-ativo-border);
+    border-radius: 0.75rem;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.2s ease-in-out;
+
+    pointer-events: none;
+}
+
+.avisoTarefaExcluida p {
+    font-size: 1rem;
+
+    margin: 0.5rem;
+    text-align: center;
+}
+
+.avisoCategoriaExcluida {
+    opacity: 0;
+    position: fixed;
+    transform: translateX(-50%);
+    top: 5%;
+    left: 50%;
+    z-index: var(--z-index-avisoCategoriaTarefaExcluida);
+
+    color: var(--text-color);
+
+    width: 15%;
+    background-color: var(--background-popups);
+    border: 2px solid var(--sidebar-button-ativo-border);
+    border-radius: 0.75rem;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.2s ease-in-out;
+
+    pointer-events: none;
+}
+
+.avisoCategoriaExcluida p {
+    font-size: 1rem;
+
+    margin: 0.5rem;
+    text-align: center;
+}
+
+.avisoTarefaExcluida.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.avisoCategoriaExcluida.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#progressBar {
+    width: 100%;
+    height: 0.75rem;
+    background-color: var(--background-popups);
+    display: flex;
+    border-radius: 1.25rem;
+}
+
+#progressBarFilledTarefa {
+    height: 100%;
+    background-color: var(--sidebar-button-ativo-border);
+    width: 100%;
+    display: flex;
+    border-radius: 0.75rem;
+    transition: width 3s linear;
+}
+
+#progressBarFilledCategoria {
+    height: 100%;
+    background-color: var(--sidebar-button-ativo-border);
+    width: 100%;
+    display: flex;
+    border-radius: 0.75rem;
+    transition: width 3s linear;
+}
+
+.mensagemSemTarefas {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    font-family: "Lexend, sans-serif";
+}
+
+.mensagemSemCategorias{
+    text-align: center;
+    color : #888;
+    padding : 0.625rem 0;
+}
+
+.calendario {
+    background-color: transparent;
+    width: 85%;
+    height: 50vh;
+    font-family: "Lexend", sans-serif;
+    user-select: none;
+
+    justify-self: center;
+}
+
+.calendario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.625rem;
+    color: #888AE6;
+}
+
+.calendario-header button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+}
+
+#mes-ano {
+    flex-grow: 1;
+    text-align: center;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--cor-titulo);
+    text-transform: uppercase;
+    border-bottom: 1px solid #B9B8B8;
+    padding-bottom: 1rem;
+    margin-left: 0.625rem;
+}
+
+.calendario-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cor-texto);
+    border-bottom: 1px solid #B9B8B8;
+    padding-bottom: 0.5rem;
+}
+
+.calendario-semana div {
+    text-align: center;
+}
+
+.calendario-dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 3rem;
+    margin-top: 0.75rem;
+}
+
+.calendario-setas {
+    width: 1rem;
+    height: 1rem;
+}
+
+.calendario-setas path {
+    stroke: var(--svg-stroke);
+    fill: var(--svg-stroke);
+}
+
+.dia {
+    border: 1px solid #B9B8B8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-color);
+    cursor: default;
+    position: relative;
+}
+
+.dia.vazio {
+    color: #6b6969;
+    background: var(--bg-color);
+}
+
+.dia.proximo-mes {
+    color: #6b6969;
+    background: var(--bg-color);
+}
+
+.dia.hoje {
+    background-color: #888AE6;
+    font-weight: 700;
+}
+
+.bolinha {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #888AE6;
+    border-radius: 50%;
+    border: 1px solid var(--text-color);
+}
+
+.popup-calendario {
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    max-height: 70vh;
+    border-radius: 1.5rem;
+    z-index: var(--z-index-calendario-popUp);
+    overflow-y: auto;
+    font-family: "Lexend", sans-serif;
+    cursor: auto;
+    transition: all 0.25s ease-in-out;
+    padding: 0 2rem 2rem 2rem;
+    background-color: var(--background-popups);
+
+}
+
+.popup-calendario h2 {
+    margin: 0;
+    width: 100%;
+}
+
+.popup-calendario.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup-conteudo-top {
+    position: sticky;
+    top: 0;
+    background-color: var(--background-popups);
+    z-index: 1; /* acima da <ul> */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+.fecha-popup path {
+    stroke: var(--svg-stroke);
+    transition: all 0.2s;
+}
+
+.fecha-popup:hover path {
+    stroke: var(--agendadas-popup-icon-hover);
+}
+
+#tarefas-popup {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: calc(100% - 8rem);
+    overflow-y: auto;
+}
+
+#tarefas-popup p,
+#tarefas-popup li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #B9B8B8;
+}
+
+#tarefas-popup li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tarefas-popup p {
+    margin: 0;
+}
+
+#tarefas-popup .tarefa-popup-titulo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    min-width: 50%;
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#tarefas-popup .tarefa-popup-descricao {
+    font-size: 0.9rem;
+    color: #6b6969;
+    min-width: 50%;
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#tarefas-popup .tarefa-popup-categoria {
+    font-size: 0.8rem;
+    color: #888AE6;
+    max-width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    border-bottom: none;
+}
+
+
+.tarefas-iconsBottom {
+    width: min(2.5vw, 1rem);
+    height: min(2.5vw, 1rem);
+    max-width: 1rem;
+    max-height: 1rem;
+}
+
+.categoria,
+.categoria-importante,
+.categoria-data {
+    height: 2.5rem;
+    gap: 0.5rem;
+}
+
+.secoes-title {
+    position: sticky;
+    margin: 1rem 0;
+}
+
+.tarefas,
+.importantes,
+.agendadas,
+.concluidas {
+    margin: 0;
+    position: fixed;
+
+    transition: all 0.25s ease-in-out;
+    opacity: 0;
+
+    height: 100%;
+    width: calc(100vw - 25%);
+
+    margin-left: 25%;
+
+
+
+    text-align: center;
+}
+
+.agendadas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: calc(100% - 25%);
+    margin-left: 25%;
+}
+
+#lista-tarefasTodas,
+#lista-tarefasImportantes,
+#lista-tarefasAgendadas,
+#lista-tarefasConcluidas {
+    height: auto;
+    max-height: calc(100% - 5rem);
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    list-style: none;
+    padding: 0;
+
+    margin: 0;
+
+    align-items: center;
+
+    overflow-y: scroll;
+}
+
+@media (max-width: 768px) {
+
+    .tarefas,
+    .importantes,
+    .agendadas,
+    .concluidas {
+        margin-left: 0;
+        justify-content: center;
+        width: 100vw;
+    }
+
+    .buscarTarefa {
+        width: auto;
+    }
+
+    .tarefa {
+        width: calc(100% - 4rem);
+        padding: 0.5rem 0.9rem;
+    }
+
+    .avisoTarefaExcluida,
+    .avisoCategoriaExcluida {
+        width: 80%;
+    }
+
+    .buttonsMenuOptions {
+        height: 5rem;
+    }
+
+    .adicionarTarefa-popup,
+    .editarTarefa-popup {
+        height: 70%;
+        min-width: 80%;
+        padding: 2rem;
+        padding-top: 1rem;
+    }
+
+    .topAddTask {
+        height: auto;
+    }
+
+    .topTask-buttons {
+        gap: 0;
+    }
+
+    .checkBoxTarefa {
+        margin-right: 0.775rem;
+    }
+
+    .inputAdicionaTarefa {
+        height: calc(100% - 7.775rem);
+        gap: 1rem;
+    }
+
+    .nomeTarefa-input {
+        margin: 0;
+        padding: 0.75rem;
+        height: auto;
+        overflow: auto;
+        word-wrap: break-word;
+    }
+
+    #descricao {
+        height: 8rem;
+    }
+
+    .wrapper-bottom-inputs {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .wrapper-categorias {
+        max-width: 100%;
+    }
+
+
+    .buttonCategorias,
+    .wrapper-categorias,
+    .tarefa-importante,
+    .tarefa-agendar {
+        border-radius: 1.25rem;
+    }
+
+    .buttonCategorias,
+    .tarefa-importante {
+        gap: 1rem;
+    }
+
+    .calendario {
+        height: 100vh;
+        width: auto;
+    }
+
+    .calendario-dias {
+        grid-auto-rows: auto;
+        width: 100vw;
+    }
+
+    .dia {
+        height: 10vh;
+        padding-top: 0.5rem;
+        align-items: start;
+    }
+
+    .search-input {
+        padding-left: 2rem;
+
+        background-position: 0.75rem center;
+        background-size: 1rem;
+    }
+
+    .search-input:focus {
+        transition: width 0.5s ease-out 0.5s;
+    }
+
+    .adicionarTarefa-button {
+        bottom: 2rem;
+        position: absolute;
+        width: calc(100% - 4rem);
+        height: 2.875rem;
+        margin: 0;
+    }
+
+    .tarefa-agendar {
+        padding: 0 1rem;
+        width: calc(100% - 2rem);
+    }
+
+    .tarefa-importante {
+        padding: 0;
+    }
+
+    /* DUDA COMEÇA AQUI EM BAIXO */
+    .funcionalidades {
+        flex-direction: column;
+
+        padding: 3rem 1.25rem;
+        gap: 2rem;
+    }
+
+    .funcionalidadesContinuacao .opcoesTopo {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .funcionalidades img {
+        height: auto;
+    }
+
+    .funcionalidades .conteudo-esquerda {
+        margin: 0;
+    }
+
+    .siteMenu {
+        width: calc(100% - 2.5rem);
+        right: 0;
+        left: 0;
+    }
+
+    .siteMenu.ativo {
+        display: block;
+    }
+
+    .siteMenu li {
+        margin: 1rem 0;
+        height: 1.5rem;
+    }
+
+    .siteMenu li a {
+        font-size: 1.3rem;
+    }
+
+    .siteMenu li p {
+        margin: 0;
+    }
+
+    .siteMenu li:last-child {
+        height: auto;
+        margin-bottom: 0;
+
+
+        transition: transform 0.5s ease-in-out;
+    }
+
+    #dropdown-recursosMenuSite-firstOption {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    #dropdown-recursosMenuSite-firstOption img {
+        width: 1.5rem;
+        height: auto;
+    }
+
+    .submenu-recursosMenuSite.ativo {
+        display: block;
+    }
+
+    .submenu-recursosMenuSite li {
+        margin: 0.25rem;
+        margin-left: 1rem;
+    }
+
+    .navCenter,
+    .cadastrar-se {
+        display: none;
+    }
+
+    .buttonComeceAgora span {
+        margin: 0;
+    }
+
+    .buttonComeceAgora img {
+        margin-left: 1rem;
+    }
+
+    #palavra3 {
+        margin: 0;
+    }
+
+    /* DUDA ACABA AQUI*/
+
+    .headerMenu {
+        padding: 1rem;
+    }
+
+    .tarefa-importante svg,
+    .buttonCategorias-image  {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+}
+
+@media(max-width: 480px) {
+    .sideBar.ativo .hamburger-button {
+        display: none;
+    }
+
+    .categoria-tarefa {
+        display: none;
+    }
+
+    .categoria-tarefa-popUpAddEditar {
+        display: block;
+    }
+
+    .tarefa-importanteTexto {
+        display: none;
+    }
+
+    .adicionarTarefa-buttonFixed-image {
+        width: 100%;
+        padding: 0;
+    }
+
+    .adicionarTarefa-buttonFixed-text {
+        display: none;
+    }
+
+    .categoria-data-imagem {
+        display: none;
+    }
+
+    .tarefa-dataTexto {
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prioriza - To Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/LogoPriorizaSmall.png">
+</head>
+
+<body class="bodyTarefas">
+
+    <!-- botao hamburguer (visivel apenas em celulares) -->
+    <button onclick="initHamburgerMenu()" id="hamburgerButton" class="hamburger-button hamburger-button-toDoList">
+        <!-- icone hamburger -->
+        <svg class="hamburger-icon hamburger-icon-toDoList" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+            width="24px" fill="#">
+            <path d="M172-278v-28h616v28H172Zm0-188v-28h616v28H172Zm0-188v-28h616v28H172Z" />
+        </svg>
+    </button>
+
+    <!-- Botão para abrir o popup de adicionar Tarefas (fixo) -->
+    <div class="adicionarTarefa" onclick="abrePopUpAdicionar()">
+        <img class="adicionarTarefa-buttonFixed-image" src="images/add.svg" alt="addTask">
+        <p class="lexend adicionarTarefa-buttonFixed-text" style="font-size: 1.25rem; color: #9B9CC8;">Adicionar tarefa
+        </p>
+    </div>
+
+    <!-- Popup de adicionar tarefa (fixo) -->
+    <div class="adicionarTarefa-popup" id="popUpAdicionarTarefa">
+        <div class="topAddTask">
+            <p class="lexend">Adicionar tarefa</p>
+
+            <div class="topAddTask-buttons">
+                <div class="icon-images small-icon-images" onclick="abrePopUpAdicionar()">
+                    <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.5 1.5L1.5 16.5M1.5 1.5L16.5 16.5" stroke="#1E1E1E" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="inputAdicionaTarefa" style="display: flex; flex-direction: column;">
+            <input type="hidden" id="categoriaSelecionada" value="">
+            <input type="text" name="tarefa" id="tarefa" placeholder="Escreva aqui o nome da sua tarefa"
+                class="nomeTarefa-input">
+
+            <textarea class="nomeTarefa-input" name="descricao" id="descricao"
+                placeholder="Escreva aqui a descricão da sua tarefa (opcional)"></textarea>
+
+            <div class="wrapper-bottom-inputs">
+
+                <div class="wrapper-categorias">
+                    <button class="buttonCategorias" onclick="abrePopUpCategorias()">
+                        <img class="buttonCategorias-image" src="images/Hash.svg" alt="">
+                        <span class="lexend bottom-imputs-text">Defina uma categoria</span>
+                    </button>
+
+                    <div class="categorias lista-categoria">
+                        <div class="categorias-top">
+                            <span class="categoria-titulo">Categorias</span>
+                            <div class="icon-images small-icon-images" onclick="abrePopUpCategorias()">
+                                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" class="svgInsideButtons">
+                                    <path d="M15 5L5 15M5 5L15 15" stroke="black" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                        </div>
+                        <ul class="categorias-list">
+                        </ul>
+                        <button class="categorias-button" onclick="trocaPopUpCategorias()"><span>+ Nova
+                                categoria</span></button>
+                    </div>
+
+                    <div class="categorias nova-categoria">
+                        <div class="categorias-top">
+                            <span class="categoria-titulo">Nova categoria</span>
+                            <div class="icon-images small-icon-images" onclick="trocaPopUpCategorias()">
+                                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" onclick="abrePopUpCategorias()">
+                                    <path
+                                        d="M15.833 10L4.16634 10M4.16634 10L9.99968 15.8334M4.16634 10L9.99968 4.16671"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div class="categoria-inputs">
+                            <div class="categoria-input">
+                                <span>Nome</span>
+                                <input type="text" id="nomeNovaCategoria"
+                                    class="categoria-inputs-nome categoria-inputs-nome-popup">
+                            </div>
+                            <div class="categoria-input">
+                                <span>Cor</span>
+                                <input type="color" id="corNovaCategoria"
+                                    class="categoria-inputs-cor categoria-inputs-cor-popup">
+                            </div>
+                        </div>
+                        <button class="categorias-button" onclick="criarCategoria()"><span>Salvar</span></button>
+                    </div>
+                </div>
+                <button class="tarefa-importante" onclick="toggleImportante(this)">
+                    <svg viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5 13.3333L8.33333 10.7917L11.6667 13.3333L10.4167 9.20833L13.75 6.83333H9.66667L8.33333 2.5L7 6.83333H2.91667L6.25 9.20833L5 13.3333ZM8.33333 16.6667C7.18056 16.6667 6.09722 16.4479 5.08333 16.0104C4.06944 15.5729 3.1875 14.9792 2.4375 14.2292C1.6875 13.4792 1.09375 12.5972 0.65625 11.5833C0.21875 10.5694 0 9.48611 0 8.33333C0 7.18056 0.21875 6.09722 0.65625 5.08333C1.09375 4.06944 1.6875 3.1875 2.4375 2.4375C3.1875 1.6875 4.06944 1.09375 5.08333 0.65625C6.09722 0.21875 7.18056 0 8.33333 0C9.48611 0 10.5694 0.21875 11.5833 0.65625C12.5972 1.09375 13.4792 1.6875 14.2292 2.4375C14.9792 3.1875 15.5729 4.06944 16.0104 5.08333C16.4479 6.09722 16.6667 7.18056 16.6667 8.33333C16.6667 9.48611 16.4479 10.5694 16.0104 11.5833C15.5729 12.5972 14.9792 13.4792 14.2292 14.2292C13.4792 14.9792 12.5972 15.5729 11.5833 16.0104C10.5694 16.4479 9.48611 16.6667 8.33333 16.6667Z"
+                            fill="black" />
+                    </svg>
+
+                    <span class="lexend bottom-imputs-text">Marcar como importante</span>
+                </button>
+                <input type="date" name="agendar" class="tarefa-agendar bottom-imputs-text" id="agendar" placeholder="Data tarefa" min="">
+
+            </div>
+
+
+        </div>
+        <button class="adicionarTarefa-button" onclick="adicionaTarefa()">
+            <span>Criar</span>
+            <svg class="popup-icons" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 10.25H19M19 10.25L10.25 1.5M19 10.25L10.25 19" stroke="#1E1E1E" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+        </button>
+    </div>
+
+    <!-- Popup de Editar as tarefas já adicionadas (fixo) -->
+    <div class="editarTarefa-popup" id="popUpEditarTarefa">
+        <input type="hidden" id="tarefaIdEditar" value="">
+        <div class="topAddTask">
+            <p class="lexend">Editar tarefa</p>
+
+            <div class="topAddTask-buttons">
+                <div class="icon-images small-icon-images" onclick="abrePopUpEditar()">
+                    <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.5 1.5L1.5 16.5M1.5 1.5L16.5 16.5" stroke="#1E1E1E" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="inputAdicionaTarefa" style="display: flex; flex-direction: column;">
+            <input type="hidden" id="categoriaSelecionadaEditar" value="">
+            <input type="text" name="tarefa" id="tarefaEditar" placeholder="Novo nome da tarefa"
+                class="nomeTarefa-input">
+            <textarea class="nomeTarefa-input" name="descricao" id="descricaoEditar"
+                placeholder="Escreva aqui a descricão da sua tarefa (opcional)"></textarea>
+
+            <div class="wrapper-bottom-inputs">
+
+                <div class="wrapper-categorias">
+                    <button class="buttonCategorias" onclick="abrePopUpCategoriasEditar()">
+                        <img class="buttonCategorias-image" src="images/Hash.svg" alt="">
+                        <span class="lexend bottom-imputs-text">Defina uma categoria</span>
+                    </button>
+
+                    <div class="categorias lista-categoria">
+                        <div class="categorias-top">
+                            <span class="categoria-titulo">Categorias</span>
+                            <div class="icon-images small-icon-images" onclick="abrePopUpCategoriasEditar()">
+                                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" class="svgInsideButtons">
+                                    <path d="M15 5L5 15M5 5L15 15" stroke="black" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                        </div>
+                        <ul class="categorias-list">
+                        </ul>
+                        <button class="categorias-button" onclick="trocaPopUpCategoriasEditar()"><span>+ Nova
+                                categoria</span></button>
+                    </div>
+
+                    <div class="categorias nova-categoria">
+                        <div class="categorias-top">
+                            <span class="categoria-titulo">Nova categoria</span>
+                            <div class="icon-images small-icon-images" onclick="trocaPopUpCategoriasEditar()">
+                                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" onclick="abrePopUpCategorias()">
+                                    <path
+                                        d="M15.833 10L4.16634 10M4.16634 10L9.99968 15.8334M4.16634 10L9.99968 4.16671"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div class="categoria-inputs">
+                            <div class="categoria-input">
+                                <span>Nome</span>
+                                <input type="text" id="nomeNovaCategoriaEditar" class="categoria-inputs-nome">
+                            </div>
+                            <div class="categoria-input">
+                                <span>Cor</span>
+                                <input type="color" id="corNovaCategoriaEditar" class="categoria-inputs-cor">
+                            </div>
+                        </div>
+                        <button class="categorias-button" onclick="criarCategoriaEditar()"><span>Salvar</span></button>
+                    </div>
+                </div>
+                <button id="tarefa-importanteEditar" class="tarefa-importante" onclick="toggleImportante(this)">
+                    <svg viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5 13.3333L8.33333 10.7917L11.6667 13.3333L10.4167 9.20833L13.75 6.83333H9.66667L8.33333 2.5L7 6.83333H2.91667L6.25 9.20833L5 13.3333ZM8.33333 16.6667C7.18056 16.6667 6.09722 16.4479 5.08333 16.0104C4.06944 15.5729 3.1875 14.9792 2.4375 14.2292C1.6875 13.4792 1.09375 12.5972 0.65625 11.5833C0.21875 10.5694 0 9.48611 0 8.33333C0 7.18056 0.21875 6.09722 0.65625 5.08333C1.09375 4.06944 1.6875 3.1875 2.4375 2.4375C3.1875 1.6875 4.06944 1.09375 5.08333 0.65625C6.09722 0.21875 7.18056 0 8.33333 0C9.48611 0 10.5694 0.21875 11.5833 0.65625C12.5972 1.09375 13.4792 1.6875 14.2292 2.4375C14.9792 3.1875 15.5729 4.06944 16.0104 5.08333C16.4479 6.09722 16.6667 7.18056 16.6667 8.33333C16.6667 9.48611 16.4479 10.5694 16.0104 11.5833C15.5729 12.5972 14.9792 13.4792 14.2292 14.2292C13.4792 14.9792 12.5972 15.5729 11.5833 16.0104C10.5694 16.4479 9.48611 16.6667 8.33333 16.6667Z"
+                            fill="black" />
+                    </svg>
+
+                    <span class="lexend bottom-imputs-text">Marcar como importante</span>
+                </button>
+                <input type="date" name="agendar" class="tarefa-agendar bottom-imputs-text" id="agendarEditar" placeholder="Data tarefa"
+                    min=""> <!-- agendar -->
+
+            </div>
+
+            <button class="adicionarTarefa-button" onclick="salvarAEdicao()">
+                <span>Salvar</span>
+                <svg class="popup-icons" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 10.25H19M19 10.25L10.25 1.5M19 10.25L10.25 19" stroke="#1E1E1E" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Popup de pesquisa de tarefa (imagem de lupa no css) -->
+    <div class="buscarTarefa" id="popUpBuscar">
+        <div class="searchContainer">
+            <input type="search" placeholder="Escreva aqui o nome da tarefa que quer localizar..." class="search-input"
+                id="search-input" oninput="pesquisarTarefas()">
+            <div class="icone-fechaBuscar icon-images small-icon-images" onclick="abrePopUpBuscar()">
+                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.5 1.5L1.5 16.5M1.5 1.5L16.5 16.5" stroke="#1E1E1E" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+            </div>
+        </div>
+
+        <!-- Tarefas localizadas -->
+        <div style="display: flex; flex-direction: row;">
+            <p class="lexend">Tarefa(s) localizada(s)</p>
+        </div>
+
+        <div id="resultadosBusca" class="buscarTarefa-resultados"></div>
+    </div>
+
+    <div class="avisoTarefaExcluida">
+        <p class="lexend">Tarefa excluída com sucesso!</p>
+        <div id="progressBar">
+            <div id="progressBarFilledTarefa"></div>
+        </div>
+    </div>
+
+    <div class="avisoCategoriaExcluida">
+        <p class="lexend">Categoria excluída com sucesso!</p>
+        <div id="progressBar">
+            <div id="progressBarFilledCategoria"></div>
+        </div>
+    </div>
+
+
+    <!-- sidebar -->
+    <div id="sideBar" class="sideBar">
+
+        <!-- logo/modo escuro -->
+        <div class="sidebar-logo-modoEscuro">
+            <a href="index.html">
+                <img class="sidebar-logo" src="images/logoPriorizaSVG.svg" alt="Logo Prioriza">
+            </a>
+
+            <button class="modoClaroEscuroButton" id="modoClaroEscuroButton">
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                    width="24px" fill="#000000">
+                    <path
+                        d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z" />
+                </svg>
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                    width="24px" fill="#ffffff">
+                    <path
+                        d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- navegacoes sidebar -->
+        <div>
+            <div class="sideBar-button" id="botaoBuscar" onclick="abrePopUpBuscar()">
+                <!--icone lupa-->
+                <svg class="sidebar-icons search-icon" viewBox="0 0 28 28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M26 26L20.2 20.2M23.3333 12.6667C23.3333 18.5577 18.5577 23.3333 12.6667 23.3333C6.77563 23.3333 2 18.5577 2 12.6667C2 6.77563 6.77563 2 12.6667 2C18.5577 2 23.3333 6.77563 23.3333 12.6667Z"
+                        stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <p class="lexend">Buscar</p>
+            </div>
+            <h1 class="titleSideBar">MENU - OPÇÕES</h1>
+            <div class="menuOptions">
+                <div class="buttonsMenuOptions" onclick="mudarSecao(this, 'tarefas')">
+                    <!--icone casa-->
+                    <svg class="sidebar-icons" viewBox="0 0 31 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.75 31.1667V16.5833H19.5V31.1667M2 12.2083L15.125 2L28.25 12.2083V28.25C28.25 29.0235 27.9427 29.7654 27.3957 30.3124C26.8487 30.8594 26.1069 31.1667 25.3333 31.1667H4.91667C4.14312 31.1667 3.40125 30.8594 2.85427 30.3124C2.30729 29.7654 2 29.0235 2 28.25V12.2083Z"
+                            stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="lexend">Início</p>
+                </div>
+                <div class="buttonsMenuOptions" onclick="mudarSecao(this, 'importantes')">
+                    <!--icone importante-->
+                    <svg class="sidebar-icons sidebar-icons-importante" viewBox="0 0 29 29" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.5 22.6667L14.1667 18.3458L19.8333 22.6667L17.7083 15.6542L23.375 11.6167H16.4333L14.1667 4.25L11.9 11.6167H4.95833L10.625 15.6542L8.5 22.6667ZM14.1667 28.3333C12.2069 28.3333 10.3653 27.9615 8.64167 27.2177C6.91806 26.474 5.41875 25.4646 4.14375 24.1896C2.86875 22.9146 1.85938 21.4153 1.11563 19.6917C0.371875 17.9681 0 16.1264 0 14.1667C0 12.2069 0.371875 10.3653 1.11563 8.64167C1.85938 6.91806 2.86875 5.41875 4.14375 4.14375C5.41875 2.86875 6.91806 1.85938 8.64167 1.11563C10.3653 0.371875 12.2069 0 14.1667 0C16.1264 0 17.9681 0.371875 19.6917 1.11563C21.4153 1.85938 22.9146 2.86875 24.1896 4.14375C25.4646 5.41875 26.474 6.91806 27.2177 8.64167C27.9615 10.3653 28.3333 12.2069 28.3333 14.1667C28.3333 16.1264 27.9615 17.9681 27.2177 19.6917C26.474 21.4153 25.4646 22.9146 24.1896 24.1896C22.9146 25.4646 21.4153 26.474 19.6917 27.2177C17.9681 27.9615 16.1264 28.3333 14.1667 28.3333Z" />
+                    </svg>
+                    <p class="lexend">Importantes</p>
+                </div>
+                <div class="buttonsMenuOptions" onclick="mudarSecao(this, 'agendadas')">
+                    <!--icone agendadas-->
+                    <svg class="sidebar-icons" viewBox="0 0 31 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20.9583 2V7.83333M9.29167 2V7.83333M2 13.6667H28.25M4.91667 4.91667H25.3333C26.9442 4.91667 28.25 6.2225 28.25 7.83333V28.25C28.25 29.8608 26.9442 31.1667 25.3333 31.1667H4.91667C3.30584 31.1667 2 29.8608 2 28.25V7.83333C2 6.2225 3.30584 4.91667 4.91667 4.91667Z"
+                            stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <p class="lexend">Agendadas</p>
+                </div>
+                <div class="buttonsMenuOptions" onclick="mudarSecao(this, 'concluidas')">
+                    <!--icone concluidas-->
+                    <svg class="sidebar-icons" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5 13.3333L14.75 17.5833L28.9167 3.41667M27.5 14.75V24.6667C27.5 25.4181 27.2015 26.1388 26.6701 26.6701C26.1388 27.2015 25.4181 27.5 24.6667 27.5H4.83333C4.08189 27.5 3.36122 27.2015 2.82986 26.6701C2.29851 26.1388 2 25.4181 2 24.6667V4.83333C2 4.08189 2.29851 3.36122 2.82986 2.82986C3.36122 2.29851 4.08189 2 4.83333 2H20.4167"
+                            stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <p class="lexend">Concluídas</p>
+                </div>
+            </div>
+
+            <h1 class="titleSideBar">SUAS CATEGORIAS</h1>
+            <ul id="categorias-list" style="padding: 0;"></ul>
+
+            <div class="wrapper-categoriasLateral">
+                <div class="sideBar-button" id="botaoAdicionarCategoria" onclick="abrirPopupCategoriaLateral()">
+                    <img src="images/add.svg" alt="addCategories" class="sideBar-button-images">
+                    <p class="lexend" style="font-size: 1.25rem; color: #9B9CC8;">Adicionar categoria</p>
+                </div>
+                <div id="popup-adicionar-categoria-lateral" class="popup-lateral">
+                    <div class="popup-lateral-top">
+                        <span class="categoria-titulo">Nova categoria</span>
+                        <div class="icon-images small-icon-images" onclick="fecharPopupCategoriaLateral()">
+                            <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 5L5 15M5 5L15 15" stroke="black" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="categoria-inputs">
+                        <div class="categoria-input">
+                            <span>Nome</span>
+                            <input type="text" id="nomeNovaCategoriaLateral" class="categoria-inputs-nome">
+                        </div>
+                        <div class="categoria-input">
+                            <span>Cor</span>
+                            <input type="color" id="corNovaCategoriaLateral" class="categoria-inputs-cor">
+                        </div>
+                    </div>
+                    <button class="categorias-button" onclick="criarCategoriaLateral()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tarefas">
+        <h1 class="lexend secoes-title">Todas as tarefas</h1>
+        <ul id="lista-tarefasTodas"></ul>
+    </div>
+
+    <div class="importantes">
+        <h1 class="lexend secoes-title">Tarefas importantes</h1>
+        <ul id="lista-tarefasImportantes"></ul>
+    </div>
+
+    <div class="agendadas">
+        <h1 class="lexend secoes-title">Calendário</h1>
+
+        <div class="calendario">
+            <div class="calendario-header">
+                <button id="calendario-mesAnterior">
+                    <svg class="calendario-setas" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5 8.5H1.5M1.5 8.5L8.5 1.5M1.5 8.5L8.5 15.5" stroke="black" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div id="calendario-mesAno"></div>
+                <button id="calendario-mesProximo">
+                    <svg class="calendario-setas" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.5 8.5H15.5M15.5 8.5L8.5 1.5M15.5 8.5L8.5 15.5" stroke="black" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="calendario-semana">
+                <div>Dom.</div>
+                <div>Seg.</div>
+                <div>Ter.</div>
+                <div>Qua.</div>
+                <div>Qui.</div>
+                <div>Sex.</div>
+                <div>Sab.</div>
+            </div>
+            <div class="calendario-dias" id="calendario-dias"></div>
+
+            <div id="popup-calendario" class="popup-calendario">
+                <div class="popup-conteudo-top">
+                    <h2 id="popup-titulo">Tarefas de [Data]</h2>
+                    <svg class="fecha-popup icon-images small-icon-images" id="fecha-popup" viewBox="0 0 18 18"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.5 1.5L1.5 16.5M1.5 1.5L16.5 16.5" stroke="#" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+                <ul id="tarefas-popup">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="concluidas">
+        <h1 class="lexend secoes-title">Tarefas concluidas</h1>
+        <ul id="lista-tarefasConcluidas"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
