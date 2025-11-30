@@ -2,8 +2,17 @@ const cadastroDiv = document.getElementById('cadastro');
 const loginDiv = document.getElementById('login');
 const toggleLogin = document.querySelector('.toggle-login');
 const toggleCadastro = document.querySelector('.toggle-cadastro');
-var textoFazerLoginCadastro = document.getElementById('fazerLoginCadastro-text');
-var botaoFazerLoginCadastro = document.getElementById('fazerLoginCadastro-button');
+const textoFazerLoginCadastro = document.getElementById('fazerLoginCadastro-text');
+const botaoFazerLoginCadastro = document.getElementById('fazerLoginCadastro-button');
+const textoFazerLoginCadastroMobile = document.getElementById('fazerLoginCadastro-text-mobile');
+const botaoFazerLoginCadastroMobile = document.getElementById('fazerLoginCadastro-button-mobile');
+
+// DUDAAAAAAAAAAAAAAAAAAAAAAAAAA
+if (window.location.hash === '#cadastro') {
+    showCadastro();
+} else {
+    showLogin();
+}
 
 // Função para alternar telas com animação
 function showCadastro() {
@@ -11,7 +20,13 @@ function showCadastro() {
     cadastroDiv.classList.add('active');
     textoFazerLoginCadastro.textContent = 'Fazer login';
     botaoFazerLoginCadastro.onclick = showLogin;
-    document.title = 'Prioriza - Cadastro';
+    textoFazerLoginCadastroMobile.textContent = 'Fazer login';
+    botaoFazerLoginCadastroMobile.onclick = showLogin;
+    document.title = 'Cadastro';
+
+    //DUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    document.body.classList.add('cadastro');   // adiciona classe
+    document.body.classList.remove('login');  // remove outra
 }
 
 function showLogin() {
@@ -19,7 +34,13 @@ function showLogin() {
     loginDiv.classList.add('active');
     textoFazerLoginCadastro.textContent = 'Cadastrar-se'
     botaoFazerLoginCadastro.onclick = showCadastro;
-    document.title = 'Prioriza - Login';
+    textoFazerLoginCadastroMobile.textContent = 'Cadastrar-se'
+    botaoFazerLoginCadastroMobile.onclick = showCadastro;
+    document.title = 'Login';
+
+    //DUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    document.body.classList.add('login');
+    document.body.classList.remove('cadastro');
 }
 
 // Eventos de clique
@@ -32,26 +53,3 @@ toggleCadastro.addEventListener('click', function (e) {
     e.preventDefault();
     showCadastro();
 });
-
-// Inicia com cadastro visível
-showCadastro();
-modoClaroEscuro();
-
-function modoClaroEscuro() {
-    const modoClaroEscuroButton = document.getElementById("modoClaroEscuroButton");
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        root.setAttribute("data-theme", savedTheme);
-        const textoBotao = modoClaroEscuroButton.querySelector(".buttonsHeaderText");
-        textoBotao.textContent = savedTheme === "dark" ? "Modo Escuro" : "Modo Claro";
-    }
-    modoClaroEscuroButton.addEventListener("click", () => {
-        const currentTheme = root.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        const textoBotao = modoClaroEscuroButton.querySelector(".buttonsHeaderText");
-        textoBotao.textContent = newTheme === "dark" ? "Modo Escuro" : "Modo Claro";
-    });
-}

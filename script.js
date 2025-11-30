@@ -492,11 +492,13 @@ function criarCategoria() { //cria uma categoria nova, no popup ADICIONAR tarefa
 
     //faz animação para voltar a lista de categorias
     const novaCategoria = document.querySelector('.nova-categoria');
+    const listaCategoria = document.querySelector('.lista-categoria');
     novaCategoria.classList.add('close');
     setTimeout(() => {
         novaCategoria.classList.remove('close', 'show');
         novaCategoria.classList.add('slide-right');
-        document.querySelector('.lista-categoria').classList.remove('slide-left');
+        listaCategoria.classList.remove('slide-left');
+        listaCategoria.classList.add('show');
     }, 300);
 
     //reseta inputs ao terminar de criar categoria
@@ -1269,21 +1271,7 @@ document.getElementById("tarefa").addEventListener("keydown", function (event) {
     }
 });
 
-document.getElementById("descricao").addEventListener("keydown", function (event) { //se o usuário estiver digitando nos inputs de adicionar/editar tarefa e clicar enter adiciona a tarefa 
-    if (event.key === "Enter") {
-        adicionaTarefa();
-        event.preventDefault();
-    }
-});
-
 document.getElementById("tarefaEditar").addEventListener("keydown", function (event) { //se o usuário estiver digitando nos inputs de editar tarefa e clicar enter edita a tarefa 
-    if (event.key === "Enter") {
-        salvarAEdicao();
-        event.preventDefault();
-    }
-});
-
-document.getElementById("descricaoEditar").addEventListener("keydown", function (event) { //se o usuário estiver digitando nos inputs de editar tarefa e clicar enter edita a tarefa 
     if (event.key === "Enter") {
         salvarAEdicao();
         event.preventDefault();

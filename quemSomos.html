@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos</title>
     <link rel="stylesheet" href="style.css">
-    <title>Prioriza - login</title>
     <link rel="icon" href="images/LogoPriorizaSmall.png">
 </head>
 
-<body>
-
+<body class="bodyQuemSomos">
+    
     <header class="headerMenu">
 
         <a class="sidebar-logo-wrapper" href="index.html">
@@ -110,50 +110,44 @@
 
     </div>
 
-    <body class="loginCadastro-body">
-        <div class="background-shape">
-
-
-            <!-- Tela de Cadastro (visível por padrão) -->
-            <div id="cadastro" class="loginCadastro-background">
-                <div class="loginCadastro-ladoInputs-topo">
-                    <h1 class="loginCadastro-ladoInputs-topo-titulo"><span>Criar conta</span></h1>
-                </div>
-                <div class="loginCadastro-ladoInputs-inputs">
-                    <input type="text" class="loginCadastro-ladoInputs-username" placeholder="Seu nome de usuário">
-                    <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Cadastre seu e-mail">
-                    <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Sua senha">
-                    <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
-                        <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Cadastrar-se">
-                    </a>
-                    <p class="loginCadastro-ladoInputs-footer">Já tem uma conta no Prioriza? <a
-                            class="loginCadastro-ladoInputs-outraOpcao-click toggle-login" href="#">Faça login!</a></p>
-                </div>
-            </div>
-
-            <!-- Tela de Login (oculta por padrão) -->
-            <div id="login" class="loginCadastro-background active">
-                <div class="loginCadastro-ladoInputs-topo">
-                    <h1 class="loginCadastro-ladoInputs-topo-titulo"><span>Acessar conta</span></h1>
-                </div>
-                <div class="loginCadastro-ladoInputs-inputs">
-                    <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Digite seu e-mail">
-                    <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Digite sua senha">
-                    <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
-                        <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Entrar">
-                    </a>
-                    <p class="loginCadastro-ladoInputs-footer">É novo no Prioriza? <a
-                            class="loginCadastro-ladoInputs-outraOpcao-click toggle-cadastro" href="#">Cadastre-se já e
-                            comece a
-                            priorizar você!</a></p>
-                </div>
-            </div>
+    <main class="mainQuemSomos">
+        <div class="q">
+            <h1 class="t1">Na correria do dia a dia manter o foco pode parecer impossível.</h1>
+            <p class="pqSITE">
+                Foi pensando nisso que criamos a Prioriza, uma ferramenta simples, estilosa e intuitiva que pode te
+                ajudar a lembrar das obrigações.
+            </p>
+        </div>
+        <button class="btnQuemSomos" onclick="window.location.href='cadastroLogin.html#cadastro'">
+            <span class="manrope">Comece a usar o Prioriza</span>
+            <img src="images\Icon.svg" style="width: 10%; height: 10%;" alt="Ícone de seta para cadastro">
+        </button>
+        <h1 class="ep">CONHEÇA A PRIORIZA</h1>
+        <div class="q2">
+            <h1 class="t1">Quem somos?</h1>
+            <p class="pqSITE">
+                Somos um time que preza por <span class="grifadoTexto">design funcional e tecnologia acessível.
+                </span>Acreditamos que organizar não tem que ser chato e exaustivo mas sim legal e relaxante.
+            </p>
+            <h1 class="t1">Qual o nosso objetivo?</h1>
+            <p class="pqSITE">
+                Se organizar a sua rotina é um desafio, com o Prioriza ela não precisa ser. Nosso objetivo é <span
+                    class="grifadoTexto">facilitar a organização e a praticidade</span> para as pessoas na organização
+                de tarefas e objetivos no dia a dia.
+            </p>
+            <h1 class="t1">Qual o nosso público-alvo?</h1>
+            <p class="pqSITE">
+                O Prioriza tem como objetivo ajudar todas as pessoas que têm dificuldade em se organizar melhor.
+                Sejam <span class="grifadoTexto">pais, filhos, trabalhadores, empreendedores, estudantes, entre muitos
+                    outros;</span> se você sente que precisa de mais organização no seu dia a dia, o Prioriza está aqui
+                para te ajudar.
+            </p>
         </div>
 
-        <footer class="lexend">Prioriza @ 2025</footer>
-        <script src="modoClaroEscuroMenus.js"></script>
-        <script src="menuHamburgerMenus.js"></script>
-        <script src="cadastroLogin.js"></script>
-    </body>
+    </main>
+    <footer class="lexend">Prioriza @ 2025</footer>
+    <script src="modoClaroEscuroMenus.js"></script>
+    <script src="menuHamburgerMenus.js"></script>
+</body>
 
 </html>

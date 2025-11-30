@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prioriza - To Do List</title>
+    <title>Funcionalidades</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/LogoPriorizaSmall.png">
 </head>
@@ -13,14 +13,14 @@
 
     <header class="headerMenu">
 
-        <a href="index.html">
+        <a class="sidebar-logo-wrapper" href="index.html">
             <img class="sidebar-logo" src="images/logoPriorizaSVG.svg" alt="Logo Prioriza">
         </a>
 
         <nav class="navCenter">
             <ul class="menu">
                 <li>
-                    <button class="buttonsHeader">
+                    <button onclick="window.location.href='quemSomos.html'" class="buttonsHeader">
                         <span class="lexend buttonsHeaderText">Quem somos</span>
                     </button>
                 </li>
@@ -37,21 +37,21 @@
 
                     <ul class="submenu">
                         <li onclick="window.location.href='pageFuncionalidades.html'">Funcionalidades</li>
-                        <li>Tutoriais</li>
-                        <li>Central de ajuda</li>
+                        <li onclick="window.location.href='centralDeAjuda.html'">Central de ajuda</li>
                     </ul>
                 </li>
 
                 <li>
-                    <button class="modoClaroEscuroButton" id="modoClaroEscuroButton" style="width: 13.5rem;">
+                    <button class="modoClaroEscuroButton" id="modoClaroEscuroButton">
                         <span class="lexend buttonsHeaderText">Modo Claro</span>
                     </button>
                 </li>
             </ul>
         </nav>
 
-        <button class="buttonsHeader cadastrar-se" onclick="window.location.href='cadastroLogin.html'">
-            <span class="lexend buttonsHeaderText">Fazer login</span>
+        <button id="fazerLoginCadastro-button" class="buttonsHeader cadastrar-se"
+            onclick="window.location.href='cadastroLogin.html'">
+            <span id="fazerLoginCadastro-text" class="lexend buttonsHeaderText">Fazer login</span>
         </button>
 
         <button class="hamburger-button" id="hamburgerButton" onclick="toggleMenu()">
@@ -71,12 +71,17 @@
     <!-- overlay escuro para o menu hamburger -->
     <div class="menu-overlay" id="menuOverlay"></div>
 
+    <!-- header pra celulares/tablets -->
     <div class="menu-container">
 
         <ul class="siteMenu manrope">
 
-            <li>
-                <a href=" " class="siteMenu-quem-somos">Quem somos</a>
+            <li onclick="window.location.href='cadastroLogin.html'" id="fazerLoginCadastro-button-mobile">
+                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text" id="fazerLoginCadastro-text-mobile">Fazer login</a>
+            </li>
+
+            <li onclick="window.location.href='quemSomos.html'">
+                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text">Quem somos</a>
             </li>
 
             <li id="modoClaroEscuroMenuButton">
@@ -85,15 +90,18 @@
 
             <li class="dropdown-recursosMenuSite">
                 <a id="dropdown-recursosMenuSite-firstOption">Recursos
-                    <img src="images/arrowDownImage.svg" alt="Ícone de seta para baixo">
+                    <svg class="iconsBlackWhite arrowIcon" width="25" height="25" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 19.25L7.5 11.75L9.25 10L15 15.75L20.75 10L22.5 11.75L15 19.25Z" fill="black" />
+                    </svg>
                 </a>
 
                 <ul class="submenu-recursosMenuSite">
-                    <li>
-                        <a href="pageFuncionalidades.html">Funcionalidades</a>
+                    <li onclick="window.location.href='pageFuncionalidades.html'">
+                        <a class="submenu-recursosMenuSite-text">Funcionalidades</a>
                     </li>
-                    <li>
-                        <a>Central de Ajuda</a>
+                    <li onclick="window.location.href='centralDeAjuda.html'">
+                        <a class="submenu-recursosMenuSite-text" e>Central de Ajuda</a>
                     </li>
                 </ul>
             </li>
@@ -102,18 +110,135 @@
 
     </div>
 
-    <section class="funcionalidades">
+    <div>
 
-    </section>
+        <section class="funcionalidades">
+            <div class="conteudo-esquerda">
+                <h1 id="tituloFuncionalidades" class="lexend"><span id="palavra1">Organize. </span><span
+                        id="palavra2">Priorize.
+                    </span><span id="palavra3">Conquiste.</span></h1>
+                <p class="manrope">Nada de bagunça: categorize, edite, marque como concluído e faça sua vida mais
+                    fácil em segundos com o Prioriza — simples, rápido e feito pra você.</p>
 
-    <section class="funcionalidadesContinuacao">
+                <button class="btnFunciona" onclick="window.location.href='cadastroLogin.html#cadastro'">
+                    <span class="manrope">Comece a usar o Prioriza</span>
+                    <img src="images\Icon.svg" alt="Ícone de seta para cadastro">
+                </button>
+            </div>
+            <div class="conteudo-direita">
+                <img src="images/imagemCelularFuncionalidades.png" alt="Ilustração de organização de tarefas">
+            </div>
+        </section>
 
-    </section>
+        <section class="funcionalidadesContinuacao">
+            <div class="circuloFundo">
+                <div class="opcoesTopo">
+                    <p class="opcao ativo manrope">PÁGINA INICIAL</p>
+                    <p class="opcao manrope">BUSCA</p>
+                    <p class="opcao manrope">CALENDÁRIO</p>
+                    <p class="opcao manrope">TAREFAS</p>
+                    <p class="opcao manrope">CATEGORIAS</p>
+                    <p class="opcao manrope">IMPORTANTE</p>
+                </div>
+                <div class="mainContent">
+                    <div id="inicioF" class="conteudo ativo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesInicio.svg" alt="Ícone de casa - Página Inicial">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">Uma visão clara do que realmente importa</h3>
+                            <p class="manrope">A página inicial mostra todas as tarefas do dia de forma organizada:
+                                título, categoria, descrição e data. Cada tarefa é organizada em um card limpo e
+                                fácil de identificar, permitindo que você acompanhe sua rotina sem confusão -
+                                tarefas organizadas permitem saber exatamente por onde começar.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza! -></a>
+                        </div>
+                    </div>
 
+                    <div id="buscaF" class="conteudo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesPesquisa.svg" alt="Ícone de lupa - Página de busca">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">Localize qualquer tarefa em segundos</h3>
+                            <p class="manrope">A ferramenta de busca permite encontrar tarefas digitando apenas
+                                parte do nome. Os resultados aparecem de forma organizada, com opções para editar,
+                                marcar ou revisar cada item.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza! -></a>
+                        </div>
+                    </div>
 
-    <footer>@ 2025</footer>
-    <script src="menuERecursos.js"></script>
+                    <div id="calendarioF" class="conteudo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesCalendario.svg"
+                                alt="Ícone de calendário - Página de calendário">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">O mês inteiro ao alcance dos olhos</h3>
+                            <p class="manrope">A área de “Agendados” traz um calendário mensal para visualizar todas
+                                as suas tarefas futuras. Basta clicar em um dia para ver compromissos, lembretes e
+                                planejamentos associados. Ideal para quem gosta de organizar a rotina com
+                                antecedência.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza! -></a>
+                        </div>
+                    </div>
 
+                    <div id="tarefasF" class="conteudo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesTarefa.svg" alt="Ícone de checklist - Página de tarefas">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">Tudo que você precisa em uma única janela</h3>
+                            <p class="manrope">O painel de "adicionar tarefa" permite adicionar título, descrição,
+                                categoria, data e prioridade para sua tarefa. Nossa interface é pensada para ser
+                                rápida e intuitiva, sem excessos de passos - com o Prioriza você cria tarefas com
+                                facilidade.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza! -></a>
+                        </div>
+                    </div>
+
+                    <div id="categoriasF" class="conteudo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesCategoria.svg"
+                                alt="Ícone de hashtag - Página de categorias">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">Sua organização do seu jeito</h3>
+                            <p class="manrope">Crie categorias com nomes e cores diferentes para separar áreas de
+                                sua vida: trabalho, escola, pessoal e quantas mais você quiser. Isso deixa a
+                                visualização de tarefas mais claras e com a identidade que você quiser - sua lista,
+                                visualmente organizada com o seu estilo.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza! -></a>
+                        </div>
+                    </div>
+
+                    <div id="importanteF" class="conteudo">
+                        <div class="quadrado-imagem-funcionalidades">
+                            <img src="images\FuncionalidadesImportante.svg"
+                                alt="Ícone de sino com exclamação - Página de tarefas importantes">
+                        </div>
+                        <div class="text-container">
+                            <h3 class="lexend">Priorize e planeje com precisão</h3>
+                            <p class="manrope">Você pode marcar tarefas importante para destacá-las em sua lista.
+                                Com nossa interface você nunca esquecerá de suas obrigações. O essencial para quem
+                                tem muitas tarefas - nada se perde.</p>
+                            <a href="cadastroLogin.html#cadastro" class="manrope">Clique aqui e cadastre-se já no
+                                Prioriza!
+                                -></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="lexend">Prioriza @ 2025</footer>
+    <script src="modoClaroEscuroMenus.js"></script>
+    <script src="menuFuncionalidades.js"></script>
+    <script src="menuHamburgerMenus.js"></script>
 </body>
-
-</html>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Ajuda</title>
     <link rel="stylesheet" href="style.css">
-    <title>Prioriza - login</title>
     <link rel="icon" href="images/LogoPriorizaSmall.png">
 </head>
 
-<body>
+<body class="bodyMenu">
 
     <header class="headerMenu">
 
@@ -77,7 +77,8 @@
         <ul class="siteMenu manrope">
 
             <li onclick="window.location.href='cadastroLogin.html'" id="fazerLoginCadastro-button-mobile">
-                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text" id="fazerLoginCadastro-text-mobile">Fazer login</a>
+                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text" id="fazerLoginCadastro-text-mobile">Fazer
+                    login</a>
             </li>
 
             <li onclick="window.location.href='quemSomos.html'">
@@ -110,50 +111,44 @@
 
     </div>
 
-    <body class="loginCadastro-body">
-        <div class="background-shape">
 
-
-            <!-- Tela de Cadastro (visível por padrão) -->
-            <div id="cadastro" class="loginCadastro-background">
-                <div class="loginCadastro-ladoInputs-topo">
-                    <h1 class="loginCadastro-ladoInputs-topo-titulo"><span>Criar conta</span></h1>
-                </div>
-                <div class="loginCadastro-ladoInputs-inputs">
-                    <input type="text" class="loginCadastro-ladoInputs-username" placeholder="Seu nome de usuário">
-                    <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Cadastre seu e-mail">
-                    <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Sua senha">
-                    <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
-                        <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Cadastrar-se">
-                    </a>
-                    <p class="loginCadastro-ladoInputs-footer">Já tem uma conta no Prioriza? <a
-                            class="loginCadastro-ladoInputs-outraOpcao-click toggle-login" href="#">Faça login!</a></p>
-                </div>
-            </div>
-
-            <!-- Tela de Login (oculta por padrão) -->
-            <div id="login" class="loginCadastro-background active">
-                <div class="loginCadastro-ladoInputs-topo">
-                    <h1 class="loginCadastro-ladoInputs-topo-titulo"><span>Acessar conta</span></h1>
-                </div>
-                <div class="loginCadastro-ladoInputs-inputs">
-                    <input type="email" class="loginCadastro-ladoInputs-email" placeholder="Digite seu e-mail">
-                    <input type="password" class="loginCadastro-ladoInputs-senha" placeholder="Digite sua senha">
-                    <a href="todolist.html" class="loginCadastro-ladoInputs-outraOpcao">
-                        <input type="button" class="loginCadastro-ladoInputs-outraOpcao" value="Entrar">
-                    </a>
-                    <p class="loginCadastro-ladoInputs-footer">É novo no Prioriza? <a
-                            class="loginCadastro-ladoInputs-outraOpcao-click toggle-cadastro" href="#">Cadastre-se já e
-                            comece a
-                            priorizar você!</a></p>
-                </div>
-            </div>
+    <!-- pagina central de ajuda -->
+    <main class="mainAjuda">
+        <div class="topoAjuda">
+            <h1 class="lexend tit1">Seja bem vindo a central de ajuda.</h1>
+            <h4 class="manrope tit2">Para que possamos te ajudar, por favor, preencha os
+                campos abaixo.</h4>
         </div>
-
-        <footer class="lexend">Prioriza @ 2025</footer>
-        <script src="modoClaroEscuroMenus.js"></script>
-        <script src="menuHamburgerMenus.js"></script>
-        <script src="cadastroLogin.js"></script>
-    </body>
-
-</html>
+        <div class="tudoAjuda">
+            <section class="sec1" style="margin-top: 0;">
+                <label class="manrope">Nome completo</label>
+                <input type="text" class="inputAjuda" placeholder="Digite o seu nome completo.">
+            </section>
+            <section class="sec1">
+                <label class="manrope">Email</label>
+                <input type="text" class="inputAjuda" placeholder="email_exemplo@gmail.com">
+            </section>
+            <section class="sec1">
+                <label class="manrope">Escolha uma opção:</label>
+                <select class="inputAjuda">
+                    <option value="">Selecione...</option>
+                    <option value="1" class="inputAjudaOptions">Problema Técnico</option>
+                    <option value="2" class="inputAjudaOptions">Dúvidas de Uso</option>
+                    <option value="3" class="inputAjudaOptions">Sugestões</option>
+                    <option value="4" class="inputAjudaOptions">Relatar bug</option>
+                </select>
+            </section>
+            <section class="sec1">
+                <label class="manrope" style="font-size: 1.5rem;">Nos Explique</label>
+                <textarea class="inputAjuda textoAjuda manrope"
+                    placeholder="Explique detalhadamente o que motivou sua solicitação."></textarea>
+            </section>
+            <section class="sec1">
+                <button class="buttonEnviar" onclick="ajuda()">Enviar<img src="images\Icon.svg"></button>
+            </section>
+        </div>
+    </main>
+    <footer class="lexend">Prioriza @ 2025</footer>
+    <script src="modoClaroEscuroMenus.js"></script>
+    <script src="menuHamburgerMenus.js"></script>
+</body>

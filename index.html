@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prioriza - Menu Principal</title>
+    <title>Prioriza</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/LogoPriorizaSmall.png">
 </head>
@@ -13,111 +13,216 @@
 
     <header class="headerMenu">
 
-        <h1>LOGO</h1>
+        <a class="sidebar-logo-wrapper" href="index.html">
+            <img class="sidebar-logo" src="images/logoPriorizaSVG.svg" alt="Logo Prioriza">
+        </a>
 
         <nav class="navCenter">
             <ul class="menu">
                 <li>
-                    <button class="buttonsHeader">
+                    <button onclick="window.location.href='quemSomos.html'" class="buttonsHeader">
                         <span class="lexend buttonsHeaderText">Quem somos</span>
                     </button>
                 </li>
 
                 <li class="dropdown">
-                    <button class="buttonsHeader">
+
+                    <button class="buttonsHeader" onclick="submenu()">
                         <span class="lexend buttonsHeaderText">Recursos</span>
                         <svg class="iconsBlackWhite" width="30" height="30" viewBox="0 0 30 30" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 19.25L7.5 11.75L9.25 10L15 15.75L20.75 10L22.5 11.75L15 19.25Z" fill="black" />
                         </svg>
-
                     </button>
+
                     <ul class="submenu">
-                        <li>Funcionalidades</li>
-                        <li>Tutoriais</li>
-                        <li>Central de ajuda</li>
+                        <li onclick="window.location.href='pageFuncionalidades.html'">Funcionalidades</li>
+                        <li onclick="window.location.href='centralDeAjuda.html'">Central de ajuda</li>
                     </ul>
                 </li>
 
                 <li>
-                    <button class="buttonsHeader" id="modoClaroEscuroButton" style="width: 13.5rem;">
+                    <button class="modoClaroEscuroButton" id="modoClaroEscuroButton">
                         <span class="lexend buttonsHeaderText">Modo Claro</span>
                     </button>
                 </li>
             </ul>
         </nav>
 
-        <button class="buttonsHeader cadastrar-se" onclick="window.location.href='cadastroLogin.html'">
-            <span class="lexend buttonsHeaderText">Cadastrar-se</span>
+        <button id="fazerLoginCadastro-button" class="buttonsHeader cadastrar-se"
+            onclick="window.location.href='cadastroLogin.html'">
+            <span id="fazerLoginCadastro-text" class="lexend buttonsHeaderText">Fazer login</span>
+        </button>
+
+        <button class="hamburger-button" id="hamburgerButton" onclick="toggleMenu()">
+            <!-- SVG para três riscos (estado fechado) -->
+            <svg class="hamburger-icon" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H19M1 1H19M1 13H19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <!-- SVG para X (estado aberto) -->
+            <svg class="close-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 1L1 13M1 1L13 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
         </button>
 
     </header>
 
+    <!-- overlay escuro para o menu hamburger -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- header pra celulares/tablets -->
+    <div class="menu-container">
+
+        <ul class="siteMenu manrope">
+
+            <li onclick="window.location.href='cadastroLogin.html'" id="fazerLoginCadastro-button-mobile">
+                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text" id="fazerLoginCadastro-text-mobile">Fazer login</a>
+            </li>
+
+            <li onclick="window.location.href='quemSomos.html'">
+                <a class="siteMenu-quem-somos submenu-recursosMenuSite-text">Quem somos</a>
+            </li>
+
+            <li id="modoClaroEscuroMenuButton">
+                <a class="siteMenu-quem-somos">Modo Claro</a>
+            </li>
+
+            <li class="dropdown-recursosMenuSite">
+                <a id="dropdown-recursosMenuSite-firstOption">Recursos
+                    <svg class="iconsBlackWhite arrowIcon" width="25" height="25" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 19.25L7.5 11.75L9.25 10L15 15.75L20.75 10L22.5 11.75L15 19.25Z" fill="black" />
+                    </svg>
+                </a>
+
+                <ul class="submenu-recursosMenuSite">
+                    <li onclick="window.location.href='pageFuncionalidades.html'">
+                        <a class="submenu-recursosMenuSite-text">Funcionalidades</a>
+                    </li>
+                    <li onclick="window.location.href='centralDeAjuda.html'">
+                        <a class="submenu-recursosMenuSite-text" e>Central de Ajuda</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
     <main class="mainMenu">
         <section id="teste1" class="section1">
 
-            <h1 class="lexend" style="font-size: 3.75rem;">Quer uma to-do list que pensa em você?</h1>
+            <h1 class="lexend tit1">Quer uma to-do list que pensa em você?</h1>
 
-            <h4 class="manrope" style="font-size: 2.5rem;margin-top:0;">Mais que tarefas e organização.<br> <!--MIGUEL-->
+            <h4 class="manrope tit2">Mais que tarefas e organização.<br> <!--MIGUEL-->
                 Prioriza, prioriza você!
             </h4>
 
-            <button class="buttonComeceAgora">
-                <svg class="iconsBlackWhite" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button class="buttonComeceAgora" onclick="window.location.href='cadastroLogin.html#cadastro'">
+                <!-- <svg class="iconsBlackWhite" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 16H30M30 16L16 2M30 16L16 30" stroke="white" stroke-width="4" stroke-linecap="round"
                         stroke-linejoin="round" />
-                </svg>
-                <span>Comece agora</span>
+                </svg> -->
+                <span class="manrope">Comece agora</span>
+                <img src="images\Icon.svg">
             </button>
         </section>
+        <p class="h1 titulos centralizarTitulo">ORGANIZAÇÃO</p>
         <section id="organizacao">
             <div class="ladoEsquerdo">
-                <div class="quadrado"></div>
+                <div class="circulo"><img src="images/organizar (1).png"></div>
             </div>
             <div class="ladoDireito">
                 <div class="titulos">
-                    <p id="h1">ORGANIZAÇÃO</p>
                     <p><strong>Categorias organizadas do seu jeito</strong></p>
                 </div>
                 <div class="mainText">
-                    <p>Crie categorias, marque como importante e organize todas as suas tarefas com o Prioriza.</p>
+                    <p class="justificar">Crie categorias, marque como importante e organize todas as suas tarefas com o
+                        Prioriza.</p>
                     <div id="imgEtxt">
                         <img src="images/Check.svg" id="imgCheck">
-                        <p id="s">Quem manda é você: organize como quiser, seja por projeto e até por cor favorita</p>
+                        <p id="s" class="justificar">Quem manda é você: organize como quiser, seja por projeto e até por
+                            cor favorita</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <p class="h1 titulos centralizarTitulo">PRATICIDADE</p>
         <section id="praticidade">
-            <p>praticidade</p>
-        </section>
-        <section id="flexibilidade">
             <div class="ladoEsquerdo">
-                <div class="quadrado"></div>
+                <div class="circulo"><img src="images/maoPraticidade.png"></div>
             </div>
             <div class="ladoDireito">
                 <div class="titulos">
-                    <p id="h1">FLEXIBILIDADE</p>
-                    <p><strong>Prioriza com você em qualquer lugar</strong></p>
+                    <p><strong>Adicione e modifique sua to-do list em segundos</strong></p>
                 </div>
                 <div class="mainText">
-                    <p>Sua lista se ajusta a você, não o contrário. Reorganize tarefas com facilidade e de qualquer lugar.</p>
+                    <p class="justificar">Nossa to-do list foi pensada para ajudar na sua rotina, você pode adicionar,
+                        organizar e concluir tarefas da forma que preferir e tudo isso em poucos cliques.</p>
                     <div id="imgEtxt">
                         <img src="images/Check.svg" id="imgCheck">
-                        <p id="s">Mantenha o equilíbrio mesmo quando os planos mudam.</p>
+                        <p id="s" class="justificar">Simples e rápido para entender</p>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="personalizacao">
-            <p>personalizacao</p>
+
+        <p class="h1 titulos centralizarTitulo">FLEXIBILIDADE</p>
+        <section id="flexibilidade">
+            <div class="ladoEsquerdo">
+                <div class="circulo"><img src="images/imagemFlexibilidade.png"></div>
+            </div>
+            <div class="ladoDireito">
+                <div class="titulos">
+                    <p><strong>Prioriza com você em qualquer lugar</strong></p>
+                </div>
+                <div class="mainText">
+                    <p class="justificar">Sua lista se ajusta a você, não o contrário. Reorganize tarefas com facilidade
+                        e de qualquer lugar.</p>
+                    <div id="imgEtxt">
+                        <img src="images/Check.svg" id="imgCheck">
+                        <p id="s" class="justificar">Mantenha o equilíbrio mesmo quando os planos mudam.</p>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <p class="h1 titulos centralizarTitulo">PERSONALIZAÇÃO</p>
+        <section id="personalizacao">
+            <div class="ladoEsquerdo">
+                <div class="circulo"><img src="images/pincel-de-rolo.png"></div>
+            </div>
+
+            <div class="ladoDireito">
+                <div class="titulos">
+                    <p><strong>Sua to-do list com seu estilo e sua organização</strong></p>
+                </div>
+
+                <div class="mainText">
+                    <p class="justificar">Personalize cores, temas e modos de visualização para deixar sua rotina mais
+                        confortável e com a sua cara.</p>
+
+                    <div id="imgEtxt">
+                        <img src="images/Check.svg" id="imgCheck">
+                        <p id="s" class="justificar">Totalmente ajustável ao seu estilo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>@ 2025</footer>
 
-    <script src="script.js"></script>
+
+
+
+
+
+    <footer class="lexend">Prioriza @ 2025</footer>
+    <script src="modoClaroEscuroMenus.js"></script>
+    <script src="menuHamburgerMenus.js"></script>
 </body>
 
 </html>

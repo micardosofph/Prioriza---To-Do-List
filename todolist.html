@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -298,16 +298,16 @@
 
         <!-- navegacoes sidebar -->
         <div>
-            <div class="sideBar-button" id="botaoBuscar" onclick="abrePopUpBuscar()">
+            <div class="sideBar-button sideBar-button-pesquisar" id="botaoBuscar" onclick="abrePopUpBuscar()">
                 <!--icone lupa-->
-                <svg class="sidebar-icons search-icon" viewBox="0 0 28 28" fill="none"
+                <svg class="sideBar-button-images search-icon" viewBox="0 0 28 28" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M26 26L20.2 20.2M23.3333 12.6667C23.3333 18.5577 18.5577 23.3333 12.6667 23.3333C6.77563 23.3333 2 18.5577 2 12.6667C2 6.77563 6.77563 2 12.6667 2C18.5577 2 23.3333 6.77563 23.3333 12.6667Z"
                         stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
 
-                <p class="lexend">Buscar</p>
+                <p class="lexend sideBar-button-text">Buscar</p>
             </div>
             <h1 class="titleSideBar">MENU - OPÇÕES</h1>
             <div class="menuOptions">
@@ -355,9 +355,9 @@
             <ul id="categorias-list" style="padding: 0;"></ul>
 
             <div class="wrapper-categoriasLateral">
-                <div class="sideBar-button" id="botaoAdicionarCategoria" onclick="abrirPopupCategoriaLateral()">
+                <div class="sideBar-button sideBar-button-adicionarCategoria" id="botaoAdicionarCategoria" onclick="abrirPopupCategoriaLateral()">
                     <img src="images/add.svg" alt="addCategories" class="sideBar-button-images">
-                    <p class="lexend" style="font-size: 1.25rem; color: #9B9CC8;">Adicionar categoria</p>
+                    <p class="lexend sideBar-button-text" style="font-size: 1.25rem; color: #9B9CC8;">Adicionar categoria</p>
                 </div>
                 <div id="popup-adicionar-categoria-lateral" class="popup-lateral">
                     <div class="popup-lateral-top">
@@ -427,7 +427,7 @@
             <div class="calendario-dias" id="calendario-dias"></div>
 
             <div id="popup-calendario" class="popup-calendario">
-                <div class="popup-conteudo-top">
+                <div class="popup-calendario-top">
                     <h2 id="popup-titulo">Tarefas de [Data]</h2>
                     <svg class="fecha-popup icon-images small-icon-images" id="fecha-popup" viewBox="0 0 18 18"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
